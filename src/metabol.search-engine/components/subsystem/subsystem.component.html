@@ -3,7 +3,7 @@
     <div class="col-md-2">
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let s of subsystems | orderBy">
-          <a [routerLink]="['detail/', encodeURIComponent(s)]">
+          <a [routerLink]="['detail/', encodeURIComponent(s)]" (click)="loadSubsystem(encodeURIComponent(s))">
             {{ s }}
           </a>
         </li>

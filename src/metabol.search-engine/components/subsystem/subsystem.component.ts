@@ -20,4 +20,8 @@ export class SubsystemComponent implements OnInit {
     });
   }
 
+  loadSubsystem(subsystem: string): void {
+    window.location.href = '/subsystem/detail/' + subsystem;
+  }
+
 }
