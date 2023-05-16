@@ -58,6 +58,8 @@ export class ConcentrationTableComponent implements OnInit {
   Disease: FormControl;
   selected = 'Combined.json';
 
+  unmappedMetabolites = [];
+
   comboboxMethods: Array<object> = [
     { id: 0, name: "Metabolitics" },
     { id: 1, name: "Direct Pathway Mapping" }
@@ -80,6 +82,7 @@ export class ConcentrationTableComponent implements OnInit {
   ngOnInit() {
     let dateTime = new Date().toLocaleString();
     console.log(this.conTable);
+    this.unmappedMetabolites = this.conTable.filter((m) => {return m[4] == false;})
     this.form = this.createForm();
     this.analyzeName = new FormControl("My Analyze - " + dateTime, Validators.required);
     this.isPublic = new FormControl(true, Validators.required);
@@ -265,7 +268,7 @@ export class ConcentrationTableComponent implements OnInit {
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
           this.notify.info('Analysis Start', 'Analysis in progress');
-          this.router.navigate(['/past-analysis', data['id']]);
+          this.router.navigate(['/past-analysis']);
         },
           error => {
             this.notify.error('Analysis Fail', error);
@@ -299,7 +302,7 @@ export class ConcentrationTableComponent implements OnInit {
         .subscribe((data: any) => {
           this.notify.info('Analysis Start', 'Analysis in progress');
           this.notify.success('Analysis Done', 'Analysis is successfully done');
-          this.router.navigate(['/past-analysis', data['id']]);
+          this.router.navigate(['/past-analysis']);
         },
           error => {
             this.notify.error('Analysis Fail', error);
@@ -336,7 +339,7 @@ export class ConcentrationTableComponent implements OnInit {
         // console.log(data);
         this.notify.info('Analysis Start', 'Analysis in progress');
         this.notify.success('Analysis Done', 'Analysis is successfully done');
-        this.router.navigate(['/past-analysis', data['id']]);
+        this.router.navigate(['/past-analysis']);
       },
         error => {
           this.notify.error('Analysis Fail', error);
