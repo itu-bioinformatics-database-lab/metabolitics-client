@@ -25,7 +25,15 @@ export class LoginComponent {
   }
 
   onSubmit(value) {
-    this.auth.login(value, () => this.router.navigate(['/panel']));
+    this.auth.login(value, () => this.router.navigate(['/past-analysis']));
+  }
+
+  onSubmitDemo() {
+    var formDemo = {
+      "Email": "demo",
+      "Password": "demo"
+    };
+    this.auth.login(formDemo, () => this.router.navigate(['/past-analysis']));
   }
 
 }
