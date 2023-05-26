@@ -16,24 +16,30 @@
 				  <mat-accordion>
 					  <mat-expansion-panel *ngFor="let i of data[type] | orderBy:'name'" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
 						  <mat-expansion-panel-header>
-						  <mat-panel-title>
+						  <mat-panel-title style="width: 33%;">
 								  <!-- <a [routerLink]="['/past-analysis', i.id]"> -->
 									  {{i.name}}<!--({{i.status ?  'done' : 'running' }})-->
 									  <!-- </a> -->
 						  </mat-panel-title>
-						  <mat-panel-description>
+						  <mat-panel-description style="width: 33%;">
 								  {{i.method}}
+						  </mat-panel-description>
+						  <mat-panel-description style="width: 33%;">
+								  {{i.disease}}
 						  </mat-panel-description>
 						  </mat-expansion-panel-header>
 
 						  <li class="list-group-item" *ngFor="let j of i.analyses | orderBy:'name'">
 								  <div class="col-md-1 col-xs-1 col-lg-1"></div>
-								  <input type="checkbox" [formControlName]="j.id" />
+								  
 <!--                <input type="checkbox" [formControl]="j.id" />{{j.id}}-->
 
 
-								  <a [routerLink]="['/past-analysis', j.id]"> {{j.name}}
-								  </a>
+								  <div>
+									<div style="display: inline-block; width: 30%;"><input type="checkbox" [formControlName]="j.id" /><a [routerLink]="['/past-analysis', j.id]">{{j.name}}</a></div>
+									<div style="display: inline-block; width: 25%;">{{j.start}}</div>
+									<div style="display: inline-block; width: 25%;">{{j.end}}</div>
+								  </div>
 						  </li>
 
 
