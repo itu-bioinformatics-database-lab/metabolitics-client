@@ -8,7 +8,9 @@
 		  Compare
 			</button>
         <form [formGroup]="form">
-
+			<div *ngIf="loading">
+				<mat-spinner diameter="50"></mat-spinner>
+			</div>
 		  <mat-tab-group>
 			<ng-template ngFor let-type [ngForOf]="data | keys">
 			  <mat-tab *ngIf="data[type].length != 0" [label]="(type == 'list' ? 'private' : type) | titlecase">

@@ -19,6 +19,7 @@ export class PastAnalysisComponent implements OnInit {
 
   temp: any = [];
 
+  loading = true;
 
   constructor(
     private http: HttpClient,
@@ -73,6 +74,7 @@ export class PastAnalysisComponent implements OnInit {
       .subscribe((d:any) => {
         this.data[type] = d;
         // console.log(d);
+        this.loading = false;
 
         this.createForm();
       });
