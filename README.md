@@ -18,7 +18,7 @@
 
 4. Run the below command under **metabolitics-client** repository.
 
-    `npm install`
+    `npm ci`
 
 5. Run the below command under **metabolitics-client** repository.
 
