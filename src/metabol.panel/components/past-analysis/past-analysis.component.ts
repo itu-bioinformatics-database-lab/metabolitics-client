@@ -74,9 +74,9 @@ export class PastAnalysisComponent implements OnInit {
       .subscribe((d:any) => {
         this.data[type] = d;
         // console.log(d);
-
+        this.loading = false;
         this.createForm();
-      }, () => console.log("error"), () => this.loading = false);
+      });
 
     // console.log(this.data[type]);
 
