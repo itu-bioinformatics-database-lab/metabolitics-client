@@ -90,7 +90,7 @@ export class PastAnalysisComponent implements OnInit {
 
     // console.log(combined_data);
 
-    this.temp = combined_data[0]['id2'];
+    // this.temp = combined_data[0]['id2'];
     // console.log(this.temp);
 
 
