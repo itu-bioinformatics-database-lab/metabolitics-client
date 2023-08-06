@@ -95,8 +95,8 @@ export class PastAnalysisComponent implements OnInit {
 
 
     this.form = this.fb.group(
-      _.zipObject(this.temp.map(x => x.id),
-      _.times(this.temp.length, _.constant([false]))),
+      _.zipObject(combined_data.map(x => x["analyses"][0].id),
+      _.times(combined_data.length, _.constant([false]))),
 
       );
 
