@@ -29,6 +29,7 @@ import {
   DialogReactionResultsComponent,
   ResultTableComponent,
   SimilarDiseasesComponent,
+  DiseasePredictionComponent,
   AnalysisListComponent,
   SearchAnalysisResultComponent,
 
@@ -50,6 +51,7 @@ import { from } from 'rxjs';
     DialogReactionResultsComponent,
     ResultTableComponent,
     SimilarDiseasesComponent,
+    DiseasePredictionComponent,
     AnalysisListComponent,
     SearchAnalysisResultComponent,
   ],
