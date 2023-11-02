@@ -72,14 +72,17 @@ export class ExcelComponent implements OnInit {
   Disease: FormControl;
   selected = 'Combined.json';
 
+  unmappedMetabolites = [];
 
   comboboxMethods: Array<object> = [
     { id: 0, name: "Metabolitics" },
     { id: 1, name: "Direct Pathway Mapping" },
+    { id: 2, name: "Pathway Enrichment"}
   ];
   methods = {
     Metabolitics: 0,
     DirectPathwayMapping: 1,
+    MetaboliteEnrichment: 2
   };
 
 
@@ -153,6 +156,9 @@ export class ExcelComponent implements OnInit {
       }
     }
     temp_list.unshift(temp_metabol_name);
+    if (temp_list.includes("- (-)")){
+      this.unmappedMetabolites.push(temp_list);
+    }
     this.usersData3.push(temp_list);
 
 }
@@ -257,6 +263,9 @@ private _filter(name: string): Disease2[] {
     else if(selectedMethod === this.methods.DirectPathwayMapping) {
       this.directPathwayMapping(this.usersData2);
     }
+    else if (selectedMethod === this.methods.MetaboliteEnrichment) {
+      this.metaboliteEnrichment(this.usersData2);
+    }
 
   }
 
@@ -311,6 +320,41 @@ private _filter(name: string): Disease2[] {
     } // if
 else{
   this.http.post(`${AppSettings.API_ENDPOINT}/analysis/direct-pathway-mapping/public`,
+  data, this.login.optionByAuthorization())
+  .subscribe((data:any) => {
+    this.notify.info('Analysis Start', 'Analysis in progress');
+    this.notify.success('Analysis Done', 'Analysis Results sent to your email');
+    this.router.navigate(['/search']);
+  },
+  error => {
+  this.notify.error('Analysis Fail', error);
+});
+localStorage.setItem('search-results', JSON.stringify(data));
+
+
+}// else 
+
+  }
+
+  metaboliteEnrichment(data) {
+
+    if (this.login.isLoggedIn()){
+      this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment`,
+         data, this.login.optionByAuthorization())
+         .subscribe((data:any) => {
+           this.notify.info('Analysis Start', 'Analysis in progress');
+           this.notify.success('Analysis Done', 'Analysis is successfully done');
+           this.router.navigate(['/past-analysis', data['id']]);
+         },
+         error => {
+         this.notify.error('Analysis Fail', error);
+      });
+
+    localStorage.setItem('search-results', JSON.stringify(data));
+    
+    } // if
+else{
+  this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment/public`,
   data, this.login.optionByAuthorization())
   .subscribe((data:any) => {
     this.notify.info('Analysis Start', 'Analysis in progress');

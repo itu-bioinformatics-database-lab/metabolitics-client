@@ -62,8 +62,8 @@ export class ConcentrationTableComponent implements OnInit {
 
   comboboxMethods: Array<object> = [
     { id: 0, name: "Metabolitics" },
-    { id: 1, name: "Direct Pathway Mapping" }
-    // { id: 2, name: "Pathway Enrichment"}
+    { id: 1, name: "Direct Pathway Mapping" },
+    { id: 2, name: "Pathway Enrichment"}
   ];
   methods = {
     Metabolitics: 0,
@@ -173,6 +173,7 @@ export class ConcentrationTableComponent implements OnInit {
     //   }
 
     // });
+    this.unmappedMetabolites = this.conTable.filter((m) => {return m[4] == false;})
   }
 
   analyze() {
@@ -333,17 +334,35 @@ export class ConcentrationTableComponent implements OnInit {
 
 
   metaboliteEnrichment(data) {
-    this.http.post(`http://127.0.0.1:5000/analysis/metabolite-enrichment`,
-      data, this.login.optionByAuthorization())
-      .subscribe((data: any) => {
-        // console.log(data);
-        this.notify.info('Analysis Start', 'Analysis in progress');
-        this.notify.success('Analysis Done', 'Analysis is successfully done');
-        this.router.navigate(['/past-analysis']);
-      },
-        error => {
-          this.notify.error('Analysis Fail', error);
-        });
-    localStorage.setItem('search-results', JSON.stringify(data));
+    if (this.login.isLoggedIn()) {
+      this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment`,
+        data, this.login.optionByAuthorization())
+        .subscribe((data: any) => {
+          this.notify.info('Analysis Start', 'Analysis in progress');
+          this.notify.success('Analysis Done', 'Analysis is successfully done');
+          this.router.navigate(['/past-analysis']);
+        },
+          error => {
+            this.notify.error('Analysis Fail', error);
+          });
+
+      localStorage.setItem('search-results', JSON.stringify(data));
+    } // if
+    else {
+      this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment/public`,
+        data, this.login.optionByAuthorization())
+        .subscribe((data: any) => {
+          this.notify.info('Analysis Start', 'Analysis in progress');
+          this.notify.success('Analysis Done', 'Analysis Results sent to your email');
+          this.router.navigate(['/search']);
+        },
+          error => {
+            this.notify.error('Analysis Fail', error);
+          });
+
+      localStorage.setItem('search-results', JSON.stringify(data));
+      // this.router.navigate(['/search']);
+
+    }// else
   }
 }
