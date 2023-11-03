@@ -33,7 +33,7 @@
 	Login
       </button>
       <mat-menu #accountMenu="matMenu">
-	<button mat-menu-item [routerLink]="['panel']">Profile</button>
+	<button mat-menu-item [routerLink]="['panel']" *ngIf="!loginService.isDemoUser()">Profile</button>
 	<button mat-menu-item [routerLink]="['past-analysis']">Past Analysis</button>
 	<button mat-menu-item [routerLink]="['panel']" (click)="loginService.logout()">
 	  Logout

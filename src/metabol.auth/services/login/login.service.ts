@@ -21,6 +21,11 @@ export class LoginService {
         this.notify.success('Login Successful', 'Welcome');
         localStorage.setItem('access_token', data.access_token);
         localStorage.setItem('userName', data.userName);
+        if (this.isLoggedIn()) {
+          this.userInfo((data) => {
+            localStorage.setItem('userId', data.id);
+          })
+        } 
       },
       error => {
         if (error.status == 400)
@@ -68,6 +73,10 @@ export class LoginService {
       .subscribe((data: any) => {
         callback(data)
       });
+  }
+
+  isDemoUser() {
+    return localStorage.getItem('userId') === "3";
   }
 
   submitUserInfo(value, callback: (data) => void) {
