@@ -57,7 +57,7 @@
 </h1>
 <div *ngIf="data?.results_pathway">
   <div>
-    <pathway-histogram [pathwayScores]="data.results_pathway"></pathway-histogram>
+    <pathway-histogram [pathwayScores]="data.results_pathway" [method]="data?.method"></pathway-histogram>
   </div>
   <div>
     <similar-diseases [id]="id"></similar-diseases>
