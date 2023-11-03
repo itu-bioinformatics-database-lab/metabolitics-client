@@ -1,16 +1,17 @@
-<div class="panel panel-default">
-  <table *ngIf="predictions" class="table table-hover">
+<div *ngIf="predictions.length !== 0" class="panel panel-default">
+  <table class="table table-hover">
     <thead>
       <tr>
+        <th>AI-based Disease Prediction</th>
+      </tr>
+      <tr>
 	<th>Disease</th>
-  <th>Prediction</th>
 	<th>Score</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let p of predictions">
-	<td>{{ p['disease'] }}</td>
-	<td>{{ p['prediction'] }}</td>
+	<td>{{ p['disease_name'] }}</td>
   <td>{{ p['score'] }}</td>
       </tr>
     </tbody>

@@ -1,6 +1,9 @@
-<div class="panel panel-default">
-  <table *ngIf="diseases" class="table table-hover">
+<div *ngIf="diseases.length !== 0" class="panel panel-default">
+  <table class="table table-hover">
     <thead>
+      <tr>
+        <th>Similarity-based Disease Prediction</th>
+      </tr>
       <tr>
 	<th>Disease</th>
 	<th>Similarity</th>

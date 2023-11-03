@@ -15,7 +15,7 @@ import { LoginService } from "../../../metabol.auth/services";
 export class SimilarDiseasesComponent implements OnInit {
 
   @Input() id;
-  diseases;
+  diseases = [];
 
   constructor(private http: HttpClient, private login: LoginService) { }
 
