@@ -153,21 +153,13 @@
             <th>Original Name</th>
             <th>Recon2</th>
             <th>Change Value</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let r of unmappedMetabolites;let i=index">
-            <td *ngIf="!r[4]" style="background-color: red;">{{ r[0] }}</td>
-            <td *ngIf="r[4]">{{ r[0] }}</td>
-            <td *ngIf="!r[4]" style="background-color: red;">{{ r[2] }} ({{r[3]}})</td>
-            <td *ngIf="r[4]">{{ r[2] }} ({{r[3]}})</td>
-            <td *ngIf="!r[4]" style="background-color: red;">{{ r[1]}}</td>
-            <td *ngIf="r[4]">{{ r[1]}}</td>
-            <td *ngIf="r[4]">
-              <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)="remove(i)"></span>
-            </td>
-            <td *ngIf="!r[4]" style="background-color: red;"></td>
+            <td>{{ r[0] }}</td>
+            <td>{{ r[2] }} ({{r[3]}})</td>
+            <td>{{ r[1]}}</td>
           </tr>
         </tbody>
       </table>
