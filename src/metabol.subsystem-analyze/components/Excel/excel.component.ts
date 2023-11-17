@@ -136,7 +136,7 @@ export class ExcelComponent implements OnInit {
     this.metaboliteNames.push(key); 
   }
 
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
   for (var _i = 0; _i < this.metaboliteNames.length; _i++) {
     let temp_list = new Array();
     let temp_metabol_name;

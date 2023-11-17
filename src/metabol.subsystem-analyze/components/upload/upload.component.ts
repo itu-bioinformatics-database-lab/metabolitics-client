@@ -76,7 +76,7 @@ export class UploadComponent {
     // this.temp = JSON.parse(JSON.stringify(e.target.result));
     this.temp = JSON.parse(e.target.result);
     // console.log(this.temp);
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
       for (let t in this.temp) {
         if (recon.metabolites[t]) {
           this.conTable.push([t, this.temp[t], recon.metabolites[t].id, recon.metabolites[t].name, true]);
@@ -108,7 +108,7 @@ export class UploadComponent {
     myReader.readAsText(file);
     myReader.onload = (e: any) => {
       const lines = e.target.result.split("\n");
-      this.loader.get('recon2', (recon) => {
+      this.loader.get('Recon3D', (recon) => {
         for (let line of lines){
           const splitted = line.split(',');
           const originalName = splitted[0];

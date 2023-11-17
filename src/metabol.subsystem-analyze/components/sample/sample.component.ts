@@ -30,7 +30,7 @@ export class SampleComponent implements OnInit {
     this.http.get('assets/example-analyze-doc-files/example.json')
 
       .subscribe((data:any) => {
-        this.loader.get('recon2', (recon) => {
+        this.loader.get('Recon3D', (recon) => {
           // tslint:disable-next-line:forin
           for (let key in data) {
             let change = data[key];

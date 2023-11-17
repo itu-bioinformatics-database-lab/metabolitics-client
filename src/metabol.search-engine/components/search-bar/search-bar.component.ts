@@ -36,7 +36,7 @@ export class SearchBarComponent {
   getSearch(query: string) {
     if (query)
     {
-      this.loader.get('recon2', (recon) => {
+      this.loader.get('Recon3D', (recon) => {
         this.filteredReactions = _.values<any>(recon.reactions)
           .filter(x => x.id.startsWith(query) || x.name.startsWith(query));
         this.filteredMetabolites = _.values<any>(recon.metabolites)

@@ -19,7 +19,7 @@ export class DialogReactionResultsComponent implements OnInit {
   reactions: Array<any>;
 
   ngOnInit() {
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
       this.reactions = [];
       for (let r of recon.pathways[this.pathway])
         if (this.fluxes[r]){

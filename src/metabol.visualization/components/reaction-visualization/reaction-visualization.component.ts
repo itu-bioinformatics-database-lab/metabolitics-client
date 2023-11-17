@@ -20,7 +20,7 @@ export class ReactionVisualizationComponent implements OnChanges {
     private escher: EscherService) { }
 
   ngOnChanges() {
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
       let element = d3.select(this.elementRef.nativeElement).select('#map_container_3');
       this.escher.buildReactionMap(this.id, recon, element);
     });

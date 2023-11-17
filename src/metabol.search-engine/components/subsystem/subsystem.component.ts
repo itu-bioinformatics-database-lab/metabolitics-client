@@ -16,7 +16,7 @@ export class SubsystemComponent implements OnInit {
   constructor(private loader: AppDataLoader, private router: Router) { }
 
   ngOnInit() {
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
       this.subsystems = _.keys(recon.pathways);
     });
   }

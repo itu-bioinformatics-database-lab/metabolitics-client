@@ -143,7 +143,7 @@ export class ConcentrationTableComponent implements OnInit {
   onSubmit(value) {
     // this.conTable.push([value['name'], parseInt(value['value'])]);
     // this.form = this.createForm();
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
       if (recon.metabolites[value['name']]) {
         // tslint:disable-next-line:max-line-length
         this.conTable.push([value['name'], value['value'], recon.metabolites[value['name']].id, recon.metabolites[value['name']].name, true]);
