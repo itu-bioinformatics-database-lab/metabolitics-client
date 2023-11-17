@@ -141,28 +141,6 @@
         </tbody>
       </table>
 
-      <table *ngIf="unmappedMetabolites.length !== 0" class="table">
-        <thead>
-          <tr>
-            <th colspan="4" style="text-align: center;">Unmapped Metabolite List</th>
-          </tr>
-        </thead>
-
-        <thead>          
-          <tr>
-            <th>Original Name</th>
-            <th>Recon3D</th>
-            <th>Change Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let r of unmappedMetabolites;let i=index">
-            <td>{{ r[0] }}</td>
-            <td>{{ r[2] }} ({{r[3]}})</td>
-            <td>{{ r[1]}}</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </form>
 </div>

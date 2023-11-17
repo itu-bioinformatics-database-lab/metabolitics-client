@@ -273,10 +273,7 @@ export class ConcentrationTableComponent implements OnInit {
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
           this.notify.info('Analysis Start', 'Analysis in progress');
-          this.router.navigate(['/past-analysis'])
-          .then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(['/past-analysis', data['id']]);
         },
           error => {
             this.notify.error('Analysis Fail', error);
@@ -310,10 +307,7 @@ export class ConcentrationTableComponent implements OnInit {
         .subscribe((data: any) => {
           this.notify.info('Analysis Start', 'Analysis in progress');
           this.notify.success('Analysis Done', 'Analysis is successfully done');
-          this.router.navigate(['/past-analysis'])
-          .then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(['/past-analysis', data['id']]);
         },
           error => {
             this.notify.error('Analysis Fail', error);
@@ -350,10 +344,7 @@ export class ConcentrationTableComponent implements OnInit {
         .subscribe((data: any) => {
           this.notify.info('Analysis Start', 'Analysis in progress');
           this.notify.success('Analysis Done', 'Analysis is successfully done');
-          this.router.navigate(['/past-analysis'])
-          .then(() => {
-            window.location.reload();
-          });
+          this.router.navigate(['/past-analysis', data['id']]);
         },
           error => {
             this.notify.error('Analysis Fail', error);

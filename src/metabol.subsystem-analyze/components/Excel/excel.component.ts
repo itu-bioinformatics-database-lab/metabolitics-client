@@ -307,10 +307,10 @@ private _filter(name: string): Disease2[] {
   directPathwayMapping(data) {
 
     if (this.login.isLoggedIn()){
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/direct-pathway-mapping`,
          data, this.login.optionByAuthorization())
          .subscribe((data:any) => {
-           this.notify.info('Analysis Start', 'Analysis in progress');
            this.notify.success('Analysis Done', 'Analysis is successfully done');
            this.router.navigate(['/past-analysis', data['id']]);
          },
@@ -342,10 +342,10 @@ localStorage.setItem('search-results', JSON.stringify(data));
   metaboliteEnrichment(data) {
 
     if (this.login.isLoggedIn()){
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment`,
          data, this.login.optionByAuthorization())
          .subscribe((data:any) => {
-           this.notify.info('Analysis Start', 'Analysis in progress');
            this.notify.success('Analysis Done', 'Analysis is successfully done');
            this.router.navigate(['/past-analysis', data['id']]);
          },
