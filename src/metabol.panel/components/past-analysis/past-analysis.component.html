@@ -35,7 +35,8 @@
 									<td>{{i.method}}</td>
 									<td>{{i.disease}}</td>
 									<td>{{i.analyses[0].start}}</td>
-									<td>{{i.analyses[0].end}}</td>
+									<td *ngIf="i.analyses[0].end">{{i.analyses[0].end}}</td>
+									<td *ngIf="!i.analyses[0].end">Analysis in progress</td>
 								</tr>
 							</tbody>
 						</table>
