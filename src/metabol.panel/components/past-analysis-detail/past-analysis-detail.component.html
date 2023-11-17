@@ -52,9 +52,13 @@
 </div>
 </div>
 <hr>
-<h1>
+<h1 *ngIf="data">
     {{data?.study_name}} - {{ data?.case_name }} - ({{data?.method}}) - {{data?.disease}} <!--({{data?.status ?  'done' : 'running' }})-->
 </h1>
+<div *ngIf="!data?.results_pathway">
+  <mat-spinner diameter="50" style="margin:30px auto 10px auto;"></mat-spinner>
+  <div style="text-align: center;">Analysis in progress...</div>
+</div>
 <div *ngIf="data?.results_pathway">
   <div>
     <pathway-histogram [pathwayScores]="data.results_pathway" [method]="data?.method"></pathway-histogram>
