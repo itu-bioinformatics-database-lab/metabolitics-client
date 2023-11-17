@@ -30,7 +30,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let i of data[type] | orderBy:'name'">
+								<tr *ngFor="let i of data[type] | orderBy:'i.analyses[0].start'">
 									<td><input type="checkbox" [formControlName]="i.analyses[0].id" style="margin-right: 2px;" /><a [routerLink]="['/past-analysis', i.analyses[0].id]">{{i.name}}</a></td>
 									<td>{{i.method}}</td>
 									<td style="text-transform: capitalize;">{{i.disease}}</td>

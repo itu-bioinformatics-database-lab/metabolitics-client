@@ -8,5 +8,6 @@ ngx-datatable{
 
 mat-expansion-panel {
   width: 50%;
-  margin-left:20%;
+  margin-left: auto;
+  margin-right: 0;
 }

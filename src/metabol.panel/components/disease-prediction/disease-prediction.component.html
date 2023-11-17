@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let p of predictions">
-	<td>{{ p['disease_name'] }}</td>
+	<td style="text-transform: capitalize;">{{ p['disease_name'] }}</td>
   <td>{{ p['score'] }}</td>
       </tr>
     </tbody>
