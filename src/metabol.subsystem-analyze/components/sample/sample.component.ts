@@ -5,6 +5,7 @@ import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import synonyms from '../../../assets/datasets/synonyms_latest.json';
+import { AppSettings } from '../../../app/';
 
 @Component({
   selector: 'app-sample',
@@ -18,6 +19,10 @@ export class SampleComponent implements OnInit {
   constructor(private http: HttpClient, private loader: AppDataLoader) { }
 
   ngOnInit() {
+    this.http.get(`${AppSettings.API_ENDPOINT}/synonyms`)
+        .subscribe((d:any) => {
+          this.synonymList = d;
+        });
     this.loadSampleDataSet();
   }
 

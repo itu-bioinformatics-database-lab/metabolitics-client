@@ -16,7 +16,7 @@
       <label>Disease / Physiological Condition</label>
       <input [(ngModel)]="query" type="text" class="form-control" placeholder="Search for diseases..." (keyup)=getSearch(query)>
     </div> -->
-    <div class="form-group input-group make-indentation">
+    <div class="form-group input-group make-indentation" style="padding: 10px; margin-left:10px; margin-right: 10px; margin-bottom: 0;">
       <label>Disease / Physiological Condition</label>
       <!-- <input [(ngModel)]="query" type="text" class="form-control" placeholder="Search for diseases..." (keyup)=getSearch(query)> -->
       <form class="example-form" style="width: 100%;">
@@ -61,7 +61,7 @@
         Field Required
       </span>
     </div> -->
-    <div class="form-group col-mat-4" *ngIf="login.isLoggedIn()">
+    <div class="form-group col-mat-4" *ngIf="login.isLoggedIn()" style="padding: 10px; margin-left:10px; margin-right: 10px;">
       <label>Public or Private</label>
       <div>
   
@@ -80,7 +80,9 @@
 
 
 
-
+<blockquote class="blockquote" style="padding: 10px; margin-left:10px; margin-right: 10px;">
+  <p class="mb-0">Number of unmapped metabolites: {{unmappedMetabolites.length}}</p>
+</blockquote>
 
 <table class="table">
   <thead>

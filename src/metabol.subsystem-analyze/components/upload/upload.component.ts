@@ -54,6 +54,14 @@ export class UploadComponent {
   private loader: AppDataLoader
 ) { }
 
+  ngOnInit() {
+    let apiUrl = `${AppSettings.API_ENDPOINT}/synonyms`;
+    this.httpClient.get(apiUrl)
+        .subscribe((d:any) => {
+          this.synonymList = d;
+        });
+  }
+
   jsonChange($event) {
     this.readJson($event.target);
   }
