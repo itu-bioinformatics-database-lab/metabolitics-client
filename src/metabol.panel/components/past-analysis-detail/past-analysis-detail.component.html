@@ -1,4 +1,8 @@
 <div class="container">
+  <div *ngIf="!data">
+    <mat-spinner diameter="50" style="margin:30px auto 10px auto;"></mat-spinner>
+    <div style="text-align: center;">Analysis is loading...</div>
+  </div>
   <div class="col-md-12" *ngIf="data">
     <div class="col-md-4">
         <mat-form-field>
@@ -29,8 +33,8 @@
                   <thead>
                   <tr>
                     <th> </th>
-                    <th>Metabolite Name</th>
-                    <th>Change Value</th>
+                    <th>Metabolite</th>
+                    <th>Value</th>
     
                   </tr>
                   </thead>
@@ -56,7 +60,7 @@
     <h1 *ngIf="data">
         {{data?.study_name}} - {{ data?.case_name }} - ({{data?.method}}) - {{data?.disease}} <!--({{data?.status ?  'done' : 'running' }})-->
     </h1>
-    <div *ngIf="!data?.results_pathway">
+    <div *ngIf="data && !data?.results_pathway">
       <mat-spinner diameter="50" style="margin:30px auto 10px auto;"></mat-spinner>
       <div style="text-align: center;">Analysis in progress...</div>
     </div>

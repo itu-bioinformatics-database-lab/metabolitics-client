@@ -34,6 +34,7 @@ export interface Disease {
 export class ConcentrationTableComponent implements OnInit {
   // Original name - change - recon_metabolite_name - recon_id
   @Input() conTable: Array<[string, number, string, string, boolean]> = [];
+  @Input() unmappedMetabolites: Array<[string, number, string, string, boolean]> = [];
   myControl = new FormControl();
   analysisTable: Array<[string, number]> = [];
   previewTable: Array<[string, string, number]> = [];
@@ -57,8 +58,6 @@ export class ConcentrationTableComponent implements OnInit {
   analyzeEmail: FormControl;
   Disease: FormControl;
   selected = 'Combined.json';
-
-  unmappedMetabolites = [];
 
   comboboxMethods: Array<object> = [
     { id: 0, name: "Metabolitics" },
@@ -302,10 +301,10 @@ export class ConcentrationTableComponent implements OnInit {
   directPathwayMapping(data) {
 
     if (this.login.isLoggedIn()) {
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/direct-pathway-mapping`,
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
-          this.notify.info('Analysis Start', 'Analysis in progress');
           this.notify.success('Analysis Done', 'Analysis is successfully done');
           this.router.navigate(['/past-analysis', data['id']]);
         },
@@ -339,10 +338,10 @@ export class ConcentrationTableComponent implements OnInit {
 
   metaboliteEnrichment(data) {
     if (this.login.isLoggedIn()) {
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment`,
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
-          this.notify.info('Analysis Start', 'Analysis in progress');
           this.notify.success('Analysis Done', 'Analysis is successfully done');
           this.router.navigate(['/past-analysis', data['id']]);
         },

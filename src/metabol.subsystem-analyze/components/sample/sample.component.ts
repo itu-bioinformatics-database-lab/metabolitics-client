@@ -15,6 +15,7 @@ import { AppSettings } from '../../../app/';
 export class SampleComponent implements OnInit {
 
   conTable: Array<[string, number, string, string, boolean]> = [];
+  unmappedMetabolites: Array<[string, number, string, string, boolean]> = [];
   public synonymList: [] = synonyms;
   constructor(private http: HttpClient, private loader: AppDataLoader) { }
 
@@ -50,6 +51,7 @@ export class SampleComponent implements OnInit {
             }
           }
         })
+        this.unmappedMetabolites = this.conTable.filter((m) => {return m[4] == false;})
       });
   }
   prioritizeMetabolites(metaboliteList) {
