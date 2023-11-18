@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppSettings } from '../../../app/';
 import synonyms from '../../../assets/datasets/synonyms_latest.json';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -51,7 +52,8 @@ export class UploadComponent {
   private login: LoginService,
   private notify: SimpleNotificationsModule,
   private httpClient: HttpClient,
-  private loader: AppDataLoader
+  private loader: AppDataLoader,
+  private notify2: NotificationsService,
 ) { }
 
   ngOnInit() {
@@ -63,6 +65,7 @@ export class UploadComponent {
   }
 
   jsonChange($event) {
+    this.notify2.info('File Upload', 'File uploading');
     this.readJson($event.target);
   }
 
@@ -99,6 +102,7 @@ export class UploadComponent {
   }
 
   csvChange($event) {
+    this.notify2.info('File Upload', 'File uploading');
     this.readCsv($event.target);
   }
 
@@ -137,6 +141,7 @@ export class UploadComponent {
 
   ///////////////////////////////// Workbench
   readText(inputValue: any){
+    this.notify2.info('File Upload', 'File uploading');
 
     this.file3 = inputValue.target.files[0];
     let fileReader = new FileReader();
@@ -170,6 +175,7 @@ export class UploadComponent {
   //////////////////////////// excel
 
   incomingfile(event) {
+    this.notify2.info('File Upload', 'File uploading');
     this.file5 = event.target.files[0];
     this.onFileChange(this.file5);
   }
