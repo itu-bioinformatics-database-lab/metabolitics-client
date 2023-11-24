@@ -79,10 +79,6 @@ export class ConcentrationTableComponent implements OnInit {
     private loader: AppDataLoader) { }
 
   ngOnInit() {
-    this.http.get(`${AppSettings.API_ENDPOINT}/synonyms`)
-        .subscribe((d:any) => {
-          this.synonymList = d;
-        });
     let dateTime = new Date().toLocaleString();
     console.log(this.conTable);
     this.unmappedMetabolites = this.conTable.filter((m) => {return m[4] == false;})

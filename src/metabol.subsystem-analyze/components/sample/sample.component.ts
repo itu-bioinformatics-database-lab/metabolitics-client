@@ -20,10 +20,6 @@ export class SampleComponent implements OnInit {
   constructor(private http: HttpClient, private loader: AppDataLoader) { }
 
   ngOnInit() {
-    this.http.get(`${AppSettings.API_ENDPOINT}/synonyms`)
-        .subscribe((d:any) => {
-          this.synonymList = d;
-        });
     this.loadSampleDataSet();
   }
 

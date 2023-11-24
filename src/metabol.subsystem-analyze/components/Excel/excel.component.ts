@@ -106,10 +106,6 @@ export class ExcelComponent implements OnInit {
 
   ngOnInit(){
 
-    this.http.get(`${AppSettings.API_ENDPOINT}/synonyms`)
-        .subscribe((d:any) => {
-          this.synonymList = d;
-        });
     this.form = this.createForm();
     this.analyzeName = new FormControl("My Analyze", Validators.required);
     this.isPublic = new FormControl(true, Validators.required);

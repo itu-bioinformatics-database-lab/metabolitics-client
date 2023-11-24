@@ -57,11 +57,6 @@ export class UploadComponent {
 ) { }
 
   ngOnInit() {
-    let apiUrl = `${AppSettings.API_ENDPOINT}/synonyms`;
-    this.httpClient.get(apiUrl)
-        .subscribe((d:any) => {
-          this.synonymList = d;
-        });
   }
 
   jsonChange($event) {
