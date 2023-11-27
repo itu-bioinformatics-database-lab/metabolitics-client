@@ -12,7 +12,7 @@
     <tbody>
       <tr *ngFor="let p of diseases | pairs">
 	<td style="text-transform: capitalize;">{{ p[0] }}</td>
-	<td>{{ p[1].toPrecision(5) }}</td>
+	<td>{{ p[1] != 0 ? p[1].toPrecision(5) : p[1] }}</td>
       </tr>
     </tbody>
   </table>
