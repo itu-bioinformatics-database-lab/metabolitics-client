@@ -128,7 +128,7 @@ export class ExcelComponent implements OnInit {
       this.labels.push(this.usersData2['analysis'][name]['Label']);
       // this.metaboliteValues.push(Object.entries(this.usersData2['analysis'][name]['Metabolites']));
     }
-    for(let key in this.usersData2['analysis'][this.cases[0]]["Metabolites"]) {
+    for(let key in this.usersData2['isMapped']) {
     this.metaboliteNames.push(key); 
   }
 
