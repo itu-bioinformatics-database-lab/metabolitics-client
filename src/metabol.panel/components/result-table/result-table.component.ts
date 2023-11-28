@@ -14,13 +14,25 @@ import * as _ from 'lodash';
 export class ResultTableComponent implements OnInit, OnChanges {
 
   @Input() data;
+  @Input() method: String;
+  title;
   tableData;
 
   analysisNames: Array<string>;
   columns;
   constructor(private dialog: MatDialog) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    if (this.method == 'Metabolitics') {
+      this.title = 'Diff Value';
+    }
+    else if (this.method == 'Direct Pathway Mapping') {
+      this.title = 'Sum Value';
+    }
+    else if (this.method == 'Pathway Enrichment') {
+      this.title = 'P-Value';
+    }
+  }
 
   ngOnChanges() {
     //console.log(this.data[0].results_pathway[0]);
