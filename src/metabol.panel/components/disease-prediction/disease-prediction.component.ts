@@ -15,6 +15,7 @@ import { LoginService } from "../../../metabol.auth/services";
 export class DiseasePredictionComponent implements OnInit {
 
   @Input() id;
+  @Input() method: String;
   predictions = [];
 
   constructor(private http: HttpClient, private login: LoginService) { }

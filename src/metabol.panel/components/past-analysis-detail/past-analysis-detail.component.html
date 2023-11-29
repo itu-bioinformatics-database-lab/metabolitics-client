@@ -72,7 +72,7 @@
         <similar-diseases [id]="id"></similar-diseases>
       </div>
       <div>
-        <disease-prediction [id]="id"></disease-prediction>
+        <disease-prediction [id]="id" [method]="data?.method"></disease-prediction>
       </div>
       <div>
         <result-table [data]="[data]" [method]="data?.method"></result-table>
