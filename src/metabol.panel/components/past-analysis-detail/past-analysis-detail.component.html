@@ -9,7 +9,7 @@
             <label style="float: left;">Cases of the study</label>
             <mat-select style="float: left !important;" [(ngModel)]="selectedObj" (selectionChange)="reloadAnalysis()">
               <mat-option *ngFor="let analysis of data.analyses | orderBy:'name'" [value]="analysis.id">
-                  {{analysis.name}} 
+                  {{analysis.name}} <span style="text-transform: capitalize;">({{analysis.label}})</span> 
                   <!-- <a [routerLink]="['/past-analysis', analysis.id]"><div style="width: 100%;">  {{analysis.name}}</div></a> </mat-option> -->
                   <!-- <a [routerLink]="['/past-analysis', analysis.id]">{{analysis.name}}</a>--></mat-option> 
             </mat-select>
