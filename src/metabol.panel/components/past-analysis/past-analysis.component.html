@@ -34,9 +34,9 @@
 									<td><input type="checkbox" [formControlName]="i.analyses[0].id" style="margin-right: 2px;" /><a [routerLink]="['/past-analysis', i.analyses[0].id]">{{i.name}} ({{i.analyses.length}} samples)</a></td>
 									<td>{{i.method}}</td>
 									<td style="text-transform: capitalize;">{{i.disease}}</td>
-									<td>{{i.analyses[0].start}}</td>
-									<td *ngIf="i.analyses[0].end">{{i.analyses[i.analyses.length - 1].end}}</td>
-									<td *ngIf="!i.analyses[0].end">Analysis in progress...</td>
+									<td>{{i.start}}</td>
+									<td *ngIf="i.end">{{i.end}}</td>
+									<td *ngIf="!i.end">Analysis in progress...</td>
 								</tr>
 							</tbody>
 						</table>
