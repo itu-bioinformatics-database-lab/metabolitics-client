@@ -263,11 +263,10 @@ export class ConcentrationTableComponent implements OnInit {
   metabolitics(data) {
 
     if (this.login.isLoggedIn()) {
-
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/fva`,
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
-          this.notify.info('Analysis Start', 'Analysis in progress');
           this.router.navigate(['/past-analysis'])
           .then(() => {
             window.location.reload();
@@ -300,10 +299,10 @@ export class ConcentrationTableComponent implements OnInit {
   directPathwayMapping(data) {
 
     if (this.login.isLoggedIn()) {
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/direct-pathway-mapping`,
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
-          this.notify.info('Analysis Start', 'Analysis in progress');
           this.router.navigate(['/past-analysis'])
           .then(() => {
             window.location.reload();
@@ -339,10 +338,10 @@ export class ConcentrationTableComponent implements OnInit {
 
   metaboliteEnrichment(data) {
     if (this.login.isLoggedIn()) {
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment`,
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
-          this.notify.info('Analysis Start', 'Analysis in progress');
           this.router.navigate(['/past-analysis'])
           .then(() => {
             window.location.reload();

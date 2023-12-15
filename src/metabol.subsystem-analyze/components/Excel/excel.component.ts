@@ -272,11 +272,10 @@ private _filter(name: string): Disease2[] {
   metabolitics(data) {
 
     if (this.login.isLoggedIn()){
-
+      this.notify.info('Analysis Start', 'Analysis in progress');
     this.http.post(`${AppSettings.API_ENDPOINT}/analysis/fva`,
       data, this.login.optionByAuthorization())
       .subscribe((data: any) => {
-        this.notify.info('Analysis Start', 'Analysis in progress');
         this.router.navigate(['/past-analysis'])
         .then(() => {
           window.location.reload();
@@ -306,10 +305,10 @@ private _filter(name: string): Disease2[] {
   directPathwayMapping(data) {
 
     if (this.login.isLoggedIn()){
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/direct-pathway-mapping`,
          data, this.login.optionByAuthorization())
          .subscribe((data:any) => {
-           this.notify.info('Analysis Start', 'Analysis in progress');
            this.router.navigate(['/past-analysis'])
            .then(() => {
             window.location.reload();
@@ -343,10 +342,10 @@ localStorage.setItem('search-results', JSON.stringify(data));
   metaboliteEnrichment(data) {
 
     if (this.login.isLoggedIn()){
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment`,
          data, this.login.optionByAuthorization())
          .subscribe((data:any) => {
-           this.notify.info('Analysis Start', 'Analysis in progress');
            this.router.navigate(['/past-analysis'])
            .then(() => {
             window.location.reload();
