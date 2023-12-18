@@ -277,9 +277,6 @@ private _filter(name: string): Disease2[] {
       data, this.login.optionByAuthorization())
       .subscribe((data: any) => {
         this.router.navigate(['/past-analysis'])
-        .then(() => {
-          window.location.reload();
-        });
       },
         error => {
           this.notify.error('Analysis Fail', error);
@@ -310,9 +307,6 @@ private _filter(name: string): Disease2[] {
          data, this.login.optionByAuthorization())
          .subscribe((data:any) => {
            this.router.navigate(['/past-analysis'])
-           .then(() => {
-            window.location.reload();
-          });
          },
          error => {
          this.notify.error('Analysis Fail', error);
@@ -347,9 +341,6 @@ localStorage.setItem('search-results', JSON.stringify(data));
          data, this.login.optionByAuthorization())
          .subscribe((data:any) => {
            this.router.navigate(['/past-analysis'])
-           .then(() => {
-            window.location.reload();
-          });
          },
          error => {
          this.notify.error('Analysis Fail', error);

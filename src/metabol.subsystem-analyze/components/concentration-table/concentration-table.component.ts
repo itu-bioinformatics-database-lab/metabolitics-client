@@ -268,9 +268,6 @@ export class ConcentrationTableComponent implements OnInit {
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
           this.router.navigate(['/past-analysis'])
-          .then(() => {
-            window.location.reload();
-          });
         },
           error => {
             this.notify.error('Analysis Fail', error);
@@ -304,9 +301,6 @@ export class ConcentrationTableComponent implements OnInit {
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
           this.router.navigate(['/past-analysis'])
-          .then(() => {
-            window.location.reload();
-          });
         },
           error => {
             this.notify.error('Analysis Fail', error);
@@ -343,9 +337,6 @@ export class ConcentrationTableComponent implements OnInit {
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
           this.router.navigate(['/past-analysis'])
-          .then(() => {
-            window.location.reload();
-          });
         },
           error => {
             this.notify.error('Analysis Fail', error);

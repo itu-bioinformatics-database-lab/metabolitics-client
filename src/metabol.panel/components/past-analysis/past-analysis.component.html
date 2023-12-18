@@ -8,13 +8,13 @@
 		  Compare
 			</button>
         <form [formGroup]="form">
-			<div *ngIf="loading">
+			<div *ngIf="data['list'].length == 0 && data['public'].length == 0 && loading">
 				<mat-spinner diameter="50" style="margin:0 auto 10px auto;"></mat-spinner>
 			</div>
 			<div *ngIf="data['list'].length == 0 && data['public'].length == 0 && !loading">
 				<p style="text-align: center;">No past analyses found.</p>
 			</div>
-		  <mat-tab-group *ngIf="!loading">
+		  <mat-tab-group *ngIf="!(data['list'].length == 0 && data['public'].length == 0)">
 			<ng-template ngFor let-type [ngForOf]="data | keys">
 			  <mat-tab *ngIf="data[type].length != 0" [label]="(type == 'list' ? 'private' : type) | titlecase">
 				<div class="panel panel-default">
