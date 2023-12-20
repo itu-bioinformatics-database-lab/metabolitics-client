@@ -4,10 +4,10 @@
     <div style="text-align: center;">Analysis is loading...</div>
   </div>
   <div class="col-md-12" *ngIf="data">
-    <div class="col-md-4">
-        <mat-form-field>
+    <div class="col-md-6">
+        <mat-form-field style="width: 100%;">
             <label style="float: left;">Cases of the study</label>
-            <mat-select style="float: left !important;" [(ngModel)]="selectedObj" (selectionChange)="reloadAnalysis()">
+            <mat-select style="float: left !important; width: 100%;" [(ngModel)]="selectedObj" (selectionChange)="reloadAnalysis()">
               <mat-option *ngFor="let analysis of data.analyses | orderBy:'name'" [value]="analysis.id">
                   {{analysis.name}} <span style="text-transform: capitalize;">({{analysis.label}})</span> 
                   <!-- <a [routerLink]="['/past-analysis', analysis.id]"><div style="width: 100%;">  {{analysis.name}}</div></a> </mat-option> -->
@@ -15,7 +15,7 @@
             </mat-select>
         </mat-form-field>
         </div>
-    <div class="col-md-8" style="padding-top: 20px;float: left; position: relative; z-index: 2; height: 50px;">
+    <div class="col-md-6" style="padding-top: 20px;float: left; position: relative; z-index: 2; height: 50px;">
       <!-- <mat-form-field style="margin-left: 60px;"> -->
     
       <mat-accordion style="text-align:left;">
@@ -26,15 +26,14 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
               <!--<concentration-table [conTable]="conTable"></concentration-table>-->
-          <div class="row">
+          <div class="row" style="padding: 10px;">
             <form  >
               <div class="table-responsive">
                 <table class="table">
                   <thead>
                   <tr>
-                    <th> </th>
-                    <th>Metabolite Name</th>
-                    <th>Fold Change Value</th>
+                    <th style="width: 50%;">Metabolite Name</th>
+                    <th style="width: 50%;">Fold Change Value</th>
     
                   </tr>
                   </thead>
@@ -42,9 +41,8 @@
                   <tbody>
     
                   <tr *ngFor="let r of conTable;let i=index">
-                    <td> </td>
-                    <td>{{ r[0] }}</td>
-                    <td>{{ r[1] }}</td>
+                    <td style="width: 50%;">{{ r[0] }}</td>
+                    <td style="width: 50%;">{{ r[1] }}</td>
     
                   </tr>
                   </tbody>

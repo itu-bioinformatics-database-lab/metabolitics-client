@@ -35,13 +35,12 @@ export class PastAnalysisComponent implements OnInit {
     let isActive = localStorage.getItem('access_token') !== null;
 
     this.actRoute.params.subscribe(params => {
-      // let searchResults = JSON.parse(localStorage.getItem('search-results'));
-      // // console.log(searchResults);
-      // if (searchResults) {
-      //   this.data.results = searchResults;
-      //   localStorage.removeItem('search-results');
-      // }
-      // else
+      let searchResults = JSON.parse(localStorage.getItem('search-results'));
+      // console.log(searchResults);
+      if (searchResults) {
+        //this.data.results = searchResults;
+        localStorage.removeItem('search-results');
+      }
 
 
       if (!isActive) {
@@ -95,7 +94,7 @@ export class PastAnalysisComponent implements OnInit {
 
 
     this.form = this.fb.group(
-      _.zipObject(combined_data.map(x => x["analyses"][0].id),
+      _.zipObject(combined_data.map(x => x["avg_id"]),
       _.times(combined_data.length, _.constant([false]))),
 
       );
