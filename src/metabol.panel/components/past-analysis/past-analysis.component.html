@@ -37,7 +37,7 @@
 									<td *ngIf="i.start">{{i.start}}</td>
 									<td *ngIf="!i.start">Analysis in queue...</td>
 									<td *ngIf="i.end">{{i.end}}</td>
-									<td *ngIf="!i.end && i.start">Analysis in progress...</td>
+									<td *ngIf="!i.end && i.start">{{i.progress}}% completed</td>
 									<td *ngIf="!i.end && !i.start">Analysis in queue...</td>
 								</tr>
 							</tbody>
