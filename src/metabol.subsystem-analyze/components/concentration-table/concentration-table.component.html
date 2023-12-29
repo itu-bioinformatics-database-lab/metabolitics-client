@@ -56,10 +56,17 @@
 
 
 <div class="row">
-  <blockquote class="blockquote" style="padding: 10px; margin-left:10px; margin-right: 10px;">
-    <p class="mb-0">Number of mapped metabolites: {{conTable.length - unmappedMetabolites.length}}</p>
-    <p class="mb-0">Number of unmapped metabolites: {{unmappedMetabolites.length}}</p>
-  </blockquote>
+  <div class="row">
+    <div class="col-md-6">
+      <div id="chart"></div>
+    </div>
+    <div class="col-md-6">
+      <blockquote class="blockquote" style="padding: 10px; margin-left:10px; margin-right: 10px;">
+        <p>Number of Mapped Metabolites: {{conTable.length - unmappedMetabolites.length}}</p>
+        <p>Number of Unmapped Metabolites: {{unmappedMetabolites.length}}</p>
+      </blockquote>
+    </div>
+  </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
     <div class="table-responsive">
       <table class="table">

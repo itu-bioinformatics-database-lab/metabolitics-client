@@ -25,6 +25,8 @@ export interface Disease {
   synonym: string;
 }
 
+declare var Plotly: any;
+
 @Component({
   selector: 'concentration-table',
   templateUrl: 'concentration-table.component.html',
@@ -94,6 +96,21 @@ export class ConcentrationTableComponent implements OnInit {
         map(value => typeof value === 'string' ? value : (value.name + value.synonym)),
         map(name => name ? this._filter(name) : this.diseases.slice())
       );
+      var data = [{
+        values: [this.conTable.length - this.unmappedMetabolites.length, this.unmappedMetabolites.length],
+        labels: ['Mapped Metabolites', 'Unmapped Metabolites'],
+        type: 'pie'
+      }];
+    
+      var layout = {
+        height: 250,
+        margin: {
+          t: 10,
+          b: 10,
+        },
+      };
+    
+      Plotly.newPlot('chart', data, layout);
   }
   fetchDiseases() {
     this.http.get(`${AppSettings.API_ENDPOINT}/diseases/all`, this.login.optionByAuthorization())
