@@ -28,6 +28,8 @@ export interface Disease2 {
   synonym: string;
 }
 
+declare var Plotly: any;
+
 @Component({
   selector: 'app-manual',
   templateUrl: 'excel.component.html',
@@ -171,6 +173,21 @@ console.log(this.usersData3);
 
 
   localStorage.removeItem('metabolitics-data');
+
+  var data = [{
+    values: [this.usersData3.length - this.unmappedMetabolites.length, this.unmappedMetabolites.length],
+    labels: ['Mapped Metabolites', 'Unmapped Metabolites'],
+    type: 'pie'
+  }];
+
+  var layout = {
+    height: 250,
+    margin: {
+      t: 10
+    },
+  };
+
+  Plotly.newPlot('chart', data, layout);
 
 
   }
