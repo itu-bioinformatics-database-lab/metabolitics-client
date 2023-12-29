@@ -182,8 +182,10 @@ console.log(this.usersData3);
 
   var layout = {
     height: 250,
+    width: 450,
     margin: {
-      t: 10
+      t: 10,
+      b: 10
     },
   };
 
