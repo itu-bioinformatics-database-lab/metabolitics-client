@@ -3,19 +3,20 @@
     <mat-spinner diameter="50" style="margin:30px auto 10px auto;"></mat-spinner>
     <div style="text-align: center;">Analysis is loading...</div>
   </div>
-  <div class="col-md-12" *ngIf="data">
-    <div class="col-md-6">
+  <div class="row" *ngIf="data">
+    <div class="col-md-7">
         <mat-form-field style="width: 100%;">
             <label style="float: left;">Cases of the study</label>
-            <mat-select style="float: left !important; width: 100%;" [(ngModel)]="selectedObj" (selectionChange)="reloadAnalysis()">
+            <mat-select style="width: 100%;" [(ngModel)]="selectedObj" (selectionChange)="reloadAnalysis()">
               <mat-option *ngFor="let analysis of data.analyses | orderBy:'name'" [value]="analysis.id">
-                  {{analysis.name}} <span style="text-transform: capitalize;">({{analysis.label}})</span> 
+                  <span style="text-transform: capitalize;">{{analysis.name}}</span>
+                  <span style="text-transform: capitalize;"> ({{analysis.label}})</span> 
                   <!-- <a [routerLink]="['/past-analysis', analysis.id]"><div style="width: 100%;">  {{analysis.name}}</div></a> </mat-option> -->
                   <!-- <a [routerLink]="['/past-analysis', analysis.id]">{{analysis.name}}</a>--></mat-option> 
             </mat-select>
         </mat-form-field>
         </div>
-    <div class="col-md-6" style="padding-top: 20px;float: left; position: relative; z-index: 2; height: 50px;">
+    <div class="col-md-5" style="margin-top: 20px; position: relative; z-index: 2; height: 50px;">
       <!-- <mat-form-field style="margin-left: 60px;"> -->
     
       <mat-accordion style="text-align:left;">
@@ -54,10 +55,30 @@
       <!-- </mat-form-field> -->
     </div>
     </div>
-    <hr>
-    <h1 *ngIf="data">
-        {{data?.study_name}} - {{ data?.case_name }} - ({{data?.method}}) - {{data?.disease}} <!--({{data?.status ?  'done' : 'running' }})-->
-    </h1>
+    <div *ngIf="data" class="panel panel-default" style="margin-top: 30px; margin-bottom: 30px;">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th style="width: 160px;"><h3>Study Name:</h3></th>
+            <th style="text-transform: capitalize;"><h3>{{data?.study_name}}</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Case Name:</td>
+            <td style="text-transform: capitalize;">{{data?.case_name}}</td>
+          </tr>
+          <tr>
+            <td>Method:</td>
+            <td style="text-transform: capitalize;">{{data?.method}}</td>
+          </tr>
+          <tr>
+            <td>Disease:</td>
+            <td style="text-transform: capitalize;">{{data?.disease}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div *ngIf="data && !data?.results_pathway">
       <mat-spinner diameter="50" style="margin:30px auto 10px auto;"></mat-spinner>
       <div style="text-align: center;">Analysis in progress...</div>

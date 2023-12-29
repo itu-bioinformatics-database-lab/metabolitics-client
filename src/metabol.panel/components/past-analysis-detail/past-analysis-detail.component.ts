@@ -26,7 +26,7 @@ export class PastAnalysisDetailComponent implements OnInit {
   idData;
   recDATA:JSON;
   selectedMethod;
-  selectedObj=30;
+  selectedObj=0;
   methods = {
     Metabolitics: '\d',
     DirectPathwayMapping: 'direct-pathway-mapping'
