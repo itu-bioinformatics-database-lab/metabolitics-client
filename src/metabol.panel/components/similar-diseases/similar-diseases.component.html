@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let p of diseases | pairs">
 	<td style="text-transform: capitalize;">{{ p[0] }}</td>
-	<td>{{ (p[1].toPrecision(5) * 1).toExponential() }}</td>
+	<td>{{ p[1] != 1 ? (p[1].toPrecision(5) * 1).toExponential() : 1 }}</td>
       </tr>
     </tbody>
   </table>

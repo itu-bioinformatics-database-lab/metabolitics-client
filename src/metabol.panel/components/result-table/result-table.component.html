@@ -15,7 +15,7 @@
   <ng-template ngFor let-n [ngForOf]="analysisNames" let-i="index">
     <ngx-datatable-column name="{{title}}" [flexGrow]="3">
       <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-	{{ (row[n].toPrecision(5) * 1).toExponential() }}
+	{{ row[n] != 1 ? (row[n] != 0 ? (row[n].toPrecision(5) * 1).toExponential() : 0)  : 1 }}
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column [flexGrow]="1">
