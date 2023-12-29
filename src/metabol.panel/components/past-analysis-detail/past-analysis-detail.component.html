@@ -4,7 +4,7 @@
     <div style="text-align: center;">Analysis is loading...</div>
   </div>
   <div class="row" *ngIf="data">
-    <div class="col-md-7">
+    <div class="col-md-6">
         <mat-form-field style="width: 100%;">
             <label style="float: left;">Cases of the study</label>
             <mat-select style="width: 100%;" [(ngModel)]="selectedObj" (selectionChange)="reloadAnalysis()">
@@ -16,6 +16,7 @@
             </mat-select>
         </mat-form-field>
         </div>
+      <div class="col-md-1"></div>
     <div class="col-md-5" style="margin-top: 20px; position: relative; z-index: 2; height: 50px;">
       <!-- <mat-form-field style="margin-left: 60px;"> -->
     
@@ -55,7 +56,7 @@
       <!-- </mat-form-field> -->
     </div>
     </div>
-    <div *ngIf="data" class="panel panel-default" style="margin-top: 30px; margin-bottom: 30px;">
+    <div *ngIf="data" class="panel panel-default" style="margin-top: 50px; margin-bottom: 30px;">
       <table class="table table-hover">
         <thead>
           <tr>
