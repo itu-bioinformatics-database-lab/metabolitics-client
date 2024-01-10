@@ -14,7 +14,7 @@ import * as _ from 'lodash';
   styleUrls: ['./past-analysis.component.css']
 })
 export class PastAnalysisComponent implements OnInit {
-  data = { list: [], disease: [], public: [], results: []};
+  data = { public: [], list: [], disease: [], results: []};
   form = new FormGroup({});
 
   temp: any = [];
@@ -49,7 +49,9 @@ export class PastAnalysisComponent implements OnInit {
 
       } else {
        // console.log('im logged in ');
-        ['list', 'public'].forEach(x => this.getData(x));
+        //['list', 'public'].forEach(x => this.getData(x));
+        this.getData('list');
+        this.getData('public');
 
         // ['public'].forEach(x => this.getData(x));
       }
@@ -73,8 +75,10 @@ export class PastAnalysisComponent implements OnInit {
       .subscribe((d:any) => {
         this.data[type] = d;
         // console.log(d);
-        this.loading = false;
         this.createForm();
+        if (type == 'public') {
+          this.loading = false;
+        }
       });
 
     // console.log(this.data[type]);
