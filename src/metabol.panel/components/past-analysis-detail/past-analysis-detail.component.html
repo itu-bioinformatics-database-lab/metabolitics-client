@@ -7,9 +7,9 @@
     <div class="col-md-6">
         <mat-form-field style="width: 100%;">
             <label style="float: left;">Cases of the study</label>
-            <mat-select style="width: 100%;" [(ngModel)]="selectedObj" (selectionChange)="reloadAnalysis()">
-              <mat-option *ngFor="let analysis of data.analyses | orderBy:'name'" [value]="analysis.id">
-                  <span style="text-transform: capitalize;">{{analysis.name}}</span>
+            <mat-select style="width: 100%;" [(ngModel)]="selectedObj" (selectionChange)="reloadAnalysis()" style="text-transform: capitalize;">
+              <mat-option *ngFor="let analysis of data.analyses" [value]="analysis.id">
+                  <span style="text-transform: capitalize;">{{analysis.name.includes(' label avg') ? 'Avg' : analysis.name}}</span>
                   <span style="text-transform: capitalize;"> ({{analysis.label}})</span> 
                   <!-- <a [routerLink]="['/past-analysis', analysis.id]"><div style="width: 100%;">  {{analysis.name}}</div></a> </mat-option> -->
                   <!-- <a [routerLink]="['/past-analysis', analysis.id]">{{analysis.name}}</a>--></mat-option> 
