@@ -24,13 +24,13 @@ export class ResultTableComponent implements OnInit, OnChanges {
 
   ngOnInit() { 
     if (this.method == 'Metabolitics') {
-      this.title = 'Diff Value';
+      this.title = 'Diff Score';
     }
     else if (this.method == 'Direct Pathway Mapping') {
-      this.title = 'Sum Value';
+      this.title = 'Mapping Score';
     }
     else if (this.method == 'Pathway Enrichment') {
-      this.title = 'P-Value';
+      this.title = 'Enrichment P-Value';
     }
   }
 
@@ -47,6 +47,9 @@ export class ResultTableComponent implements OnInit, OnChanges {
 
     for (let i = 0; i < this.data.length; i++) {
       let analysisName = `${this.data[i].name}_${i}`;
+      if (this.data.length == 1) {
+        analysisName = "score";
+      }
       this.columns.push({ prop: analysisName, comparator: this.scoreComparator.bind(this) });
       this.analysisNames.push(analysisName);
       for (let t of tableData)
