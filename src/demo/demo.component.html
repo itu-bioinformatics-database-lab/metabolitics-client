@@ -21,10 +21,10 @@
 
 
     <div class="panel panel-success" id="Link1">
-      <div class="panel-heading">Creating an account</div>
+      <div class="panel-heading">Creating an Account</div>
       <div class="panel-body">
 
-        Head to the top menu and click on ‘Login’ section, you will see Signup text under the login button, click it and you will be redirected to the signup page to create a new account.
+        Head to the top menu and click on ‘Login’ section, you will see 'Sign Up' text under the login button, click it and you will be redirected to the 'Sign Up' page to create a new account. As an other option, you may login as a demo user. 
         <br><br>
 
         <img class="img-responsive img-center" src="assets/demo/account1.png">
@@ -46,7 +46,7 @@
 
         <h4> Search For Pathways/Metabolites/Reactions </h4>
         <ul>
-          <li> In metabolitesDB we can search for the following from the main page:
+          <li> In MetaboliticsDB, we can search for the following from the main page:
 
             <ul>
               <li>Pathways </li>
@@ -61,11 +61,10 @@
         <br><br>
 
         <h4> Search Metabolomics Analysis </h4>
-        <br>
-        You can find this subsection in the top menu Search Section.
-        For better user experience our search services support autocomplete for possible search texts based on the search characters you enter.
+        You can find this subsection in the top menu 'Search' section.
+        For better user experience, our search services support autocomplete for possible search texts based on the search characters you enter.
 
-        In metabolitesDB we support Searching public studies based on two search criteria:
+        In MetaboliticsDB we support searching public studies based on two search criteria:
 
         <ul>
           <li>Search studies based on Metabolites
@@ -79,12 +78,11 @@
           <li>Search studies based on Pathways
             <ul>
               <li>
-                Enter Pathway name, Change, Diff quantifier, and Diff Amount and then press the Add button and click search to get the results, you may choose multiple pathways to search at once.
+                Enter pathway name, change, diff quantifier, and diff amount and then press the 'Add' button and click 'Search' to get the results, you may choose multiple pathways to search at once.
               </li>
             </ul>
           </li>
         </ul>
-        <br><br>
         <img class="img-responsive img-center" src="assets/demo/search2.png">
         <br><br>
 
@@ -99,18 +97,18 @@
     <div class="panel panel-info" id="Link3">
       <div class="panel-heading">Browse</div>
       <div class="panel-body">
-        In Metabolitics we provide the option to browse pathways and analyzed studies.
-        You can access them from the Top menu Browse Section.
-        <br>
-        <h4> Pathway Browse Page </h4>
+        In MetaboliticsDB, we provide the option to browse pathways and analyzed studies.
+        You can access them from the top menu 'Browse' section.
+        <br><br>
+        <h4> Browse Pathways Page </h4>
         Here we provide visualization and reaction information for each pathway, choose a pathway and its details along with a plot will be shown.
         <br><br>
         <img class="img-responsive img-center" src="assets/demo/browse1.png">
         <br><br>
         <h4>
-          Analysis Browse Page
+          Browse Metabolomics Analyses Page
         </h4>
-        on this page, you can check the analyzed studies and also we provide the option to compare them by choosing a number of studies and press the compare button.
+        On this page, you can check the analyzed studies and also we provide the option to compare them by choosing a number of studies and pressing the 'Compare' button.
         <br><br>
         <img class="img-responsive img-center" src="assets/demo/browse2.png">
         <br><br>
@@ -120,54 +118,48 @@
     </div>
 
     <div class="panel panel-primary" id="Link4">
-      <div class="panel-heading">Supported data formats
+      <div class="panel-heading">Supported Data Formats
       </div>
       <div class="panel-body">
         <!--<h3>Quick Notes: </h3>-->
 
-        in metabliticsdb we provided Sample files for each format we support, they are provided in the documentation section.
-        Metabolites Names should be from one of our supported Datasets:
+        In MetaboliticsDB, we provided sample files for each format we support, they are provided in the 'Documentation' section.
+        Metabolite names should be from one of our supported datasets:
         <ul>
-          <li>CheBI</li>
-          <li>Hmdb</li>
-          <li>Kegg</li>
+          <li>ChEBI</li>
+          <li>HMDB</li>
+          <li>KEGG</li>
           <li>PubChem</li>
         </ul>
 
 
-        <h4>
-          You can access the sample file formats from the Top menu Documentation Section.
-        </h4>
-
-
-        <br>
 
         <img class="img-responsive img-center" src="assets/demo/formats.png">
-        <br><br>
+        <br>
         <h4> CSV Format: </h4>
 
-        First column entries should contain metabolites names and the second column entries should include their corresponding values/measurements.
+        First column entries should contain metabolite names and the second column entries should include their corresponding values/measurements.
         <br><br>
         <img class="img-responsive img-center" src="assets/demo/csv.png"  >
-        <br><br>
+        <br>
         <h4>JSON Format: </h4>
-        The Keys should be metabolites names and the values should be their corresponding values/measurements.
+        Keys should be metabolite names and the values should be their corresponding values/measurements.
         <br><br>
         <img class="img-responsive img-center" src="assets/demo/json.png">
-        <br><br>
+        <br>
         <h4> Metabolitics Format:</h4>
 
-        <h5> In our format we have two sheets: </h5>
+        <h5> In our format, we have two sheets: </h5>
 
         <ul>
           <li>Sheet one:
             <ul>
-              <li>Sheet name should be “data”, it includes subjects ids/names and their corresponding metabolites names and  Values/measurements.</li>
-              <li> The first row (starting from the second column)should include subjects ids/names.</li>
-              <li>The first column(starting from the second row)should include metabolite names from one of our supported datasets, each metabolite row entry should include the corresponding values/measurements for the subjects.
+              <li>Sheet name should be “data”, it includes subjects ids/names and their corresponding metabolite names and  values/measurements.</li>
+              <li>The first row (starting from the second column) should include subject ids/names.</li>
+              <li>The first column(starting from the second row) should include metabolite names from one of our supported datasets, each metabolite row entry should include the corresponding values/measurements for the subjects.
               </li>
             </ul>
-            <br><br>
+            <br>
             <img class="img-responsive img-center" src="assets/demo/sheet1.png">
 
           </li>
@@ -175,13 +167,13 @@
 
           <li>Sheet two:
             <ul>
-              <li>Sheet name should be “meta”, it should include study name, group label, subjects ids/names, and their corresponding labels.</li>
-              <li>The first row should include ‘study name’ as first Entry and the Study name of your choice as the second entry.</li>
+              <li>Sheet name should be “meta”, it should include study name, group label, subject ids/names, and their corresponding labels.</li>
+              <li>The first row should include ‘study name’ as first entry and the study name of your choice as the second entry.</li>
               <li>The second row should include ‘control/healthy/wildtype group’ in the first entry and its corresponding label in the second entry.</li>
               <li>In the third row, the first entry should be ‘subject id’ and the second entry should be ‘group’ which will represent the subject label.</li>
-              <li>For the next columns(starting from row 4), column 1 should have the subjects ids/names and column 2 should have the corresponding labels of the subject.</li>
+              <li>For the next columns (starting from row 4), first column should have the subject ids/names and second column should have the corresponding labels of the subject.</li>
             </ul>
-            <br><br>
+            <br>
             <img class="img-responsive img-center" src="assets/demo/sheet2.png">
           </li>
         </ul>
@@ -206,42 +198,44 @@
       <div class="panel-heading">Analyze</div>
       <div class="panel-body">
 
-        In the analyze section, we provided 3 options for the user to use our analyze service:
+        In the analyze section, we provided 3 options for the user to use our analysis service:
         <ul>
 
-          <li>Uploading Studies files to be analyzed.</li>
-          <li>Manually Add Metabolites Changes to be Analyzed.</li>
-          <li>Use a Sample Metabolite Changes List.</li>
+          <li>Uploading study files to be analyzed.</li>
+          <li>Manually adding metabolite changes to be analyzed.</li>
+          <li>Using a sample metabolite changes list.</li>
         </ul>
         <img class="img-responsive img-center" src="assets/demo/analyze1.png">
 
-
-        <h4> Upload File </h4>
-        when choosing this option you will be directed to the following page with various file formats that MetaboliticsDB support, for detailed information about the formats refer to Supported data formats section.
         <br>
+        <h4> Upload File </h4>
+
+        When choosing this option, you will be directed to the following page with various file formats that MetaboliticsDB support, for detailed information about the formats refer to 'Supported Data Formats' section.
+        <br><br>
         <img class="img-responsive img-center" src="assets/demo/analyze2.png">
         <br>
-        Choose your preferred format and upload your study file, and you will be redirected to the following page:
+        Choose your preferred format, upload your study file, and you will be redirected to the following page:
         <br><br>
         <img class="img-responsive img-center" src="assets/demo/analyze3.png">
+        <img class="img-responsive img-center" src="assets/demo/analyze4.png">
         <br>
 
-        Now, whether you choose to Upload File, Enter Metabolites Manually or sample metabolites list you will be directed to this page with your study data processed to be sent to be analyzed, but first, you have to provide the necessary information that maybe not be included in your uploaded file:
+        Now, whether you choose to upload file, enter metabolites manually or sample metabolites list you will be directed to this page with your study data processed to be sent to be analyzed, but first, you have to provide the necessary information that maybe not be included in your uploaded file:
 
         <ul>
-          <li>If you are not a registered user, we will be sending the analysis result to your email address so you should fill the email entry.</li>
-          <li>All users should fill the Disease or Condition entry for the study.</li>
-          <li>The user will have to provide us with a Study name.</li>
-          <li>The user will have the option to make his study public or private (private studies are only provided for registered users).</li>
+          <li>The user should fill the 'Disease / Physiological Condition' entry for the study.</li>
+          <li>The user will have to provide us with a study name.</li>
+          <li>The user will have the option to make his study public or private.</li>
           <li>We also give the option to manually add or remove metabolites changes.</li>
-          <li>Last Step, the user has to choose the analysis algorithm, we currently support two analysis algorithms:
+          <li>Last Step, the user has to choose the analysis algorithm, we currently support three analysis algorithms:
 
             <ul>
               <li>Metabolitics (our own analysis)</li>
               <li>Direct Pathway Mapping</li>
+              <li>Pathway Enrichment Analysis</li>
             </ul>
           </li>
-          <li>After clicking the Analyze button, the user will be directed to the result page or sent to the main page if it’s not ready immediately, but the users can check there study analysis result at any time from Browse analysis section, for private studies the user will have to be logged in to view his private studies.</li>
+          <li>After clicking the 'Analyze' button, the user will be directed to the past analyses page.</li>
 
 
         </ul>
@@ -254,33 +248,33 @@
     <div class="panel panel-success" id="Link6">
       <div class="panel-heading">Accessing Analysis Results</div>
       <div class="panel-body">
-        <h4> Registered Users  </h4>
-        Registered Users will be able to send their data to be analyzed and Control whether the analysis results will be publicly available or kept private and only shown for the user.
+        Users are able to send their data to be analyzed and control whether the analysis results will be publicly available or kept private and only shown for the user.
+        To access analysis results, head to top menu 'Account' section, choose 'Past Analysis' subsection, and you will be redirected to your public and private study results. Then you check the results or compare them.
         <br><br>
+        <h4>Public Analyses</h4>
+        <br>
         <img class="img-responsive img-center" src="assets/demo/results1.png">
-        To access analysis results for registered users, Head to top menu to Account section and choose Past Analysis subsection and you will be redirected to your Private studies results list, then you check the results or compare between them, you can check public studies results from the same page if you choose to by clicking ‘Public’ button.
-
-        <h4> Unregistered Users </h4>
-
-        Unregistered users are able to send their data to be analyzed but they will need to provide us with their Email, once the analysis results are ready they will be notified by email with the link to access it, an important notice is that those studies done by unregistered users will be publicly available.
-        To access publicly available analysis results, head to the top menu and select the ‘Browse’ section and click ‘Browse Analysis’ and you will be redirected to analysis results page.
-        <br><br>
+        <br>
+        <h4>Private Analyses</h4>
+        <br>
         <img class="img-responsive img-center" src="assets/demo/results2.png">
 
+        <h4> Analysis Results Page</h4>
+        When we access an analysis result page,
+        the  analysis  results  are presented in multiple levels of details in both visual and tabular forms.
 
-        <h4> Analysis results page</h4>
-        when we access an analysis result page,
-        The  analysis  results  arepresented in multiple levels of details in both visual and tabular forms
-
-        a bar plot for the top 20 pathways with the highest absolute diff values will is provided.
+        A bar chart for the top 20 pathways with the highest absolute diff values is provided.
+        <br><br>
         <img class="img-responsive img-center" src="assets/demo/disease1.png">
+        <img class="img-responsive img-center" src="assets/demo/disease2.png">
+        <img class="img-responsive img-center" src="assets/demo/disease3.png">
 
         <br><br>
         Below the bar plot, in a tabular form, all the pathways are listed with their computed diff
-        values.Next to each pathway, two buttons are placed. The left button visualizes the corresponding
+        values. Next to each pathway, two buttons are placed. The left button visualizes the corresponding
         pathway where each node represents a metabolite, and each edge represents a reaction. Edges are colored
-        and thickened according tothe corresponding reactions’ diff value.
-        This form of visualization allows the user to quickly inspect what parts of thepathway experience the most
+        and thickened according to the corresponding reactions’ diff value.
+        This form of visualization allows the user to quickly inspect what parts of the pathway experience the most
         change.
         <br><br>
         <img class="img-responsive img-center" src="assets/demo/results-pathways.png">
@@ -304,24 +298,25 @@
 
 
     <div class="panel panel-success" id="Link7">
-      <div class="panel-heading">Comparison of different analysis results for different datasets</div>
+      <div class="panel-heading">Comparison of Different Analysis Results for Different Datasets</div>
       <div class="panel-body">
         MetaboliticsDB allows users to compare and contrast their metabolomics data analysis results to
         their previous analysis results,
-         other users’publicly available analysis results,
+         other users’ publicly available analysis results,
          and diseases and physiologicalconditions stored in the database.
-        to achieve that you have to access the browse analysis subsection from the Browse section in the top menu.
+        To achieve that, you have to access the 'Browse Analysis' subsection from the 'Browse' section in the top menu.
         <br><br>
         <img class="img-responsive img-center" src="assets/demo/compare1.png">
-        Next the user will have to choose a study and press it, it will expand and show the subjects inside that study, in each subject tab there is a checkbutton, in order to compare between two subjects the user will have to click the check buttons for all the subjects he wishes to compare.
+        <br>
+        Next, the user will have to choose studies to compare. In order to compare between studies, the user will have to click the check buttons for all the studies he wishes to compare.
         <br><br>
         <img class="img-responsive img-center" src="assets/demo/compare2.png">
         <br>
-        Next the user will go up to the top menu and click the button ‘Compare ’, in our case we choose two subjects from the same study, Next we will be redirected to the comparison page.
+        Next, the user will go up to the top menu and click the button 'Compare', in our case we choose two studies. Next we will be redirected to the comparison page.
 
-        The comparison page features a heatmap at the top
+        The comparison page features a heat map at the top
         where the rows represent pathways with the highest variance in terms of their diff values among the compared analysis
-        results, and the columns represent the compared analysis results.Each cell in the heatmap is colored according to the corresponding pathway diff values.
+        results, and the columns represent the compared analysis results. Each cell in the heatmap is colored according to the corresponding pathway diff values.
 
         in the lower part of the page we will find each subjects pathways values.
 
@@ -343,12 +338,11 @@
     <div class="panel panel-success" id="Link8">
       <div class="panel-heading">Disease Association</div>
       <div class="panel-body">
-        Disease association
         <ul>
           <li>Another novel feature of the MetaboliticsDB is that for each metabolomics
             analysis result, the closest set of diseases and physiological conditions are
             computed based on the similarity of the pathway-level metabolic behavior.</li>
-          <li>   MetaboliticsDB stores metabolomics analysis results
+          <li>MetaboliticsDB stores metabolomics analysis results
             of a number of diseases (pre-computed and recorded in its database).
             Then, for each user submitted analysis run, the user is presented the
             top 5 diseases (e.g., diabetes) that have most similarity to the currently
@@ -358,11 +352,25 @@
         </ul>
 
 
-        To check disease association, we access our analysis results page (refer to Accessing Analysis Section in the Tutorial),
-        then we will notice under the pathways bar plot there is a Disease Section, in it we will provide the top 5 similar
+        To check disease association, we access our analysis results page,
+        then we will notice under the pathways bar plot there is a 'Similarity-based Disease Prediction' section, in it we will provide the top 5 similar
         cases and their similarity value to the analysis.
         <br><br>
-        <img class="img-responsive img-center" src="assets/demo/disease1.png">
+        <img class="img-responsive img-center" src="assets/demo/similarity.png">
+        <br><br><br>
+      </div>
+    </div>
+
+    <div class="panel panel-success" id="Link9">
+      <div class="panel-heading">Disease Prediction</div>
+      <div class="panel-body">
+        Disease prediction is an additional metabolomics data processing capability of MetaboliticsDB. Machine learning models are trained by 
+        MetaboliticsDB using past metabolomics data analysis findings for every disease on a regular basis. By saving the results 
+        as binary files, trained machine learning models can be used for prediction without the need for further training. In order to 
+        anticipate whether a certain disease is associated with the analysis or not, stored machine learning models are performed on 
+        the reaction diff values of future metabolomics data analysis findings.
+        <br><br>
+        <img class="img-responsive img-center" src="assets/demo/prediction.png">
         <br><br><br>
       </div>
     </div>
@@ -373,18 +381,19 @@
 
   <div class="col-lg-2" id="stay">
     <div class="list-group">
-      <a href="http://metabolitics.biodb.sehir.edu.tr/demo/#Link1" class="list-group-item">Creating an account</a>
-      <a href="http://metabolitics.biodb.sehir.edu.tr/demo/#Link2" class="list-group-item">Search</a>
-      <a href="http://metabolitics.biodb.sehir.edu.tr/demo/#Link3" class="list-group-item">Browse</a>
-      <a href="http://metabolitics.biodb.sehir.edu.tr/demo/#Link4" class="list-group-item">Supported Data Formats</a>
-      <a href="http://metabolitics.biodb.sehir.edu.tr/demo/#Link5" class="list-group-item">Analyze</a>
-      <a href="http://metabolitics.biodb.sehir.edu.tr/demo/#Link6" class="list-group-item">Accessing Analysis Results</a>
-      <a href="http://metabolitics.biodb.sehir.edu.tr/demo/#Link7" class="list-group-item">Comparison of different analysis results for different datasets</a>
-      <a href="http://metabolitics.biodb.sehir.edu.tr/demo/#Link8" class="list-group-item">Disease Association</a>
+      <a href="http://metabolitics.itu.edu.tr/demo#Link1" class="list-group-item">Creating an Account</a>
+      <a href="http://metabolitics.itu.edu.tr/demo#Link2" class="list-group-item">Search</a>
+      <a href="http://metabolitics.itu.edu.tr/demo#Link3" class="list-group-item">Browse</a>
+      <a href="http://metabolitics.itu.edu.tr/demo#Link4" class="list-group-item">Supported Data Formats</a>
+      <a href="http://metabolitics.itu.edu.tr/demo#Link5" class="list-group-item">Analyze</a>
+      <a href="http://metabolitics.itu.edu.tr/demo#Link6" class="list-group-item">Accessing Analysis Results</a>
+      <a href="http://metabolitics.itu.edu.tr/demo#Link7" class="list-group-item">Comparison of Different Analysis Results for Different Datasets</a>
+      <a href="http://metabolitics.itu.edu.tr/demo#Link8" class="list-group-item">Disease Association</a>
+      <a href="http://metabolitics.itu.edu.tr/demo#Link9" class="list-group-item">Disease Prediction</a>
 
     </div>
     <div class="list-group">
-      <a href="https://github.com/sehir-bioinformatics-database-lab/metabol" target="_blank" class="list-group-item active">
+      <a href="https://github.com/itu-bioinformatics-database-lab/metabolitics-api-v2" target="_blank" class="list-group-item active">
         <h4 class="list-group-item-heading">GitHub</h4>
         <p class="list-group-item-text">Source Code</p>
       </a>
