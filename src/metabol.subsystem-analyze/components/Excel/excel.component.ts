@@ -163,6 +163,7 @@ export class ExcelComponent implements OnInit {
     this.usersData3.push(temp_list);
 
 }
+  this.updatePieChart();
   });
   
 
@@ -174,24 +175,28 @@ console.log(this.usersData3);
 
   localStorage.removeItem('metabolitics-data');
 
-  var data = [{
-    values: [this.usersData3.length - this.unmappedMetabolites.length, this.unmappedMetabolites.length],
-    labels: ['Mapped Metabolites', 'Unmapped Metabolites'],
-    type: 'pie'
-  }];
-
-  var layout = {
-    height: 250,
-    width: 450,
-    margin: {
-      t: 10,
-      b: 10
-    },
-  };
-
-  Plotly.newPlot('chart', data, layout);
+  this.updatePieChart();
 
 
+  }
+
+  updatePieChart() {
+    var data = [{
+      values: [this.usersData3.length - this.unmappedMetabolites.length, this.unmappedMetabolites.length],
+      labels: ['Mapped Metabolites', 'Unmapped Metabolites'],
+      type: 'pie'
+    }];
+  
+    var layout = {
+      height: 250,
+      width: 450,
+      margin: {
+        t: 10,
+        b: 10
+      },
+    };
+  
+    Plotly.newPlot('chart', data, layout);
   }
 
     onSubmit() {

@@ -96,22 +96,13 @@ export class ConcentrationTableComponent implements OnInit {
         map(value => typeof value === 'string' ? value : (value.name + value.synonym)),
         map(name => name ? this._filter(name) : this.diseases.slice())
       );
-      var data = [{
-        values: [this.conTable.length - this.unmappedMetabolites.length, this.unmappedMetabolites.length],
-        labels: ['Mapped Metabolites', 'Unmapped Metabolites'],
-        type: 'pie'
-      }];
-    
-      var layout = {
-        height: 250,
-        margin: {
-          t: 10,
-          b: 10,
-        },
-      };
-    
-      Plotly.newPlot('chart', data, layout);
+    this.updatePieChart();
   }
+
+  ngOnChanges(){
+    this.updatePieChart();
+  }
+
   fetchDiseases() {
     this.http.get(`${AppSettings.API_ENDPOINT}/diseases/all`, this.login.optionByAuthorization())
 
@@ -143,6 +134,25 @@ export class ConcentrationTableComponent implements OnInit {
   }
   remove(index) {
     this.conTable.splice(index, 1);
+    this.updatePieChart();
+  }
+
+  updatePieChart() {
+    var data = [{
+      values: [this.conTable.length - this.unmappedMetabolites.length, this.unmappedMetabolites.length],
+      labels: ['Mapped Metabolites', 'Unmapped Metabolites'],
+      type: 'pie'
+    }];
+  
+    var layout = {
+      height: 250,
+      margin: {
+        t: 10,
+        b: 10,
+      },
+    };
+  
+    Plotly.react('chart', data, layout);
   }
 
   createForm() {
@@ -189,7 +199,8 @@ export class ConcentrationTableComponent implements OnInit {
     //   }
 
     // });
-    this.unmappedMetabolites = this.conTable.filter((m) => {return m[4] == false;})
+    this.unmappedMetabolites = this.conTable.filter((m) => {return m[4] == false;});
+    this.updatePieChart();
   }
 
   analyze() {
