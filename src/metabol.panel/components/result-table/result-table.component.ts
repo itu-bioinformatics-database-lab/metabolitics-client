@@ -46,7 +46,7 @@ export class ResultTableComponent implements OnInit, OnChanges {
     this.analysisNames = [];
 
     for (let i = 0; i < this.data.length; i++) {
-      let analysisName = `${this.data[i].name}_${i}`;
+      let analysisName = `score ${i}`;
       if (this.data.length == 1) {
         analysisName = "score";
       }
