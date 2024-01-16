@@ -156,7 +156,11 @@ export class ExcelComponent implements OnInit {
         temp_list.unshift("- (-)");
       }
     }
-    temp_list.unshift(temp_metabol_name);
+    if (temp_metabol_name in this.usersData2['metabol']) {
+      temp_list.unshift(this.usersData2['metabol'][temp_metabol_name]);
+    } else {
+      temp_list.unshift(temp_metabol_name);
+    }
     if (temp_list.includes("- (-)")){
       this.unmappedMetabolites.push(temp_list);
     }
