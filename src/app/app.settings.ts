@@ -5,7 +5,7 @@ export class AppSettings {
     // return 'http://164.90.180.104/api';
     // Uncomment below line for local development
     //return 'http://127.0.0.1:5000';
-    return 'metabolitics.itu.edu.tr/api';
+    return 'http://metabolitics.itu.edu.tr/api';
   }
 
   public static get NOTIFICATION_OPTIONS() {
