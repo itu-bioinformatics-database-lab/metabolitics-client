@@ -55,7 +55,18 @@ export class CompareAnalysisComponent implements OnInit, AfterViewInit {
     this.http.post(apiUrl, options)
       .subscribe((data:any) => {
         data.type = 'heatmap';
-        let layout = { margin: { l: 300 }, height: 1500 };
+        let layout = { 
+          margin: { 
+            l: 300 
+          }, 
+          height: 1500,
+          xaxis: {
+            automargin: true,
+          },
+          yaxis: {
+            automargin: true,
+          }, 
+        };
         Plotly.plot('heatmap', [data], layout);
       });
   }
