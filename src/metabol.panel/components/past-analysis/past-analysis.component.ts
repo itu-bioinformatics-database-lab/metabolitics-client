@@ -14,11 +14,12 @@ import * as _ from 'lodash';
   styleUrls: ['./past-analysis.component.css']
 })
 export class PastAnalysisComponent implements OnInit {
-  data = { list: [], disease: [], public: [], results: []};
+  data = { public: [], list: [], disease: [], results: []};
   form = new FormGroup({});
 
   temp: any = [];
 
+  loading = true;
 
   constructor(
     private http: HttpClient,
@@ -37,10 +38,9 @@ export class PastAnalysisComponent implements OnInit {
       let searchResults = JSON.parse(localStorage.getItem('search-results'));
       // console.log(searchResults);
       if (searchResults) {
-        this.data.results = searchResults;
+        //this.data.results = searchResults;
         localStorage.removeItem('search-results');
       }
-      else
 
 
       if (!isActive) {
@@ -49,7 +49,9 @@ export class PastAnalysisComponent implements OnInit {
 
       } else {
        // console.log('im logged in ');
-        ['list', 'public'].forEach(x => this.getData(x));
+        //['list', 'public'].forEach(x => this.getData(x));
+        this.getData('list');
+        this.getData('public');
 
         // ['public'].forEach(x => this.getData(x));
       }
@@ -73,8 +75,10 @@ export class PastAnalysisComponent implements OnInit {
       .subscribe((d:any) => {
         this.data[type] = d;
         // console.log(d);
-
         this.createForm();
+        if (type == 'public') {
+          this.loading = false;
+        }
       });
 
     // console.log(this.data[type]);
@@ -89,13 +93,13 @@ export class PastAnalysisComponent implements OnInit {
 
     // console.log(combined_data);
 
-    this.temp = combined_data[0]['id2'];
+    // this.temp = combined_data[0]['id2'];
     // console.log(this.temp);
 
 
     this.form = this.fb.group(
-      _.zipObject(this.temp.map(x => x.id),
-      _.times(this.temp.length, _.constant([false]))),
+      _.zipObject(combined_data.map(x => x["avg_id"]),
+      _.times(combined_data.length, _.constant([false]))),
 
       );
 

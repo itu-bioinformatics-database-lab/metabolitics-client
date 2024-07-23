@@ -25,6 +25,8 @@ export interface Disease {
   synonym: string;
 }
 
+declare var Plotly: any;
+
 @Component({
   selector: 'concentration-table',
   templateUrl: 'concentration-table.component.html',
@@ -34,6 +36,7 @@ export interface Disease {
 export class ConcentrationTableComponent implements OnInit {
   // Original name - change - recon_metabolite_name - recon_id
   @Input() conTable: Array<[string, number, string, string, boolean]> = [];
+  @Input() unmappedMetabolites: Array<[string, number, string, string, boolean]> = [];
   myControl = new FormControl();
   analysisTable: Array<[string, number]> = [];
   previewTable: Array<[string, string, number]> = [];
@@ -60,8 +63,8 @@ export class ConcentrationTableComponent implements OnInit {
 
   comboboxMethods: Array<object> = [
     { id: 0, name: "Metabolitics" },
-    { id: 1, name: "Direct Pathway Mapping" }
-    // { id: 2, name: "Pathway Enrichment"}
+    { id: 1, name: "Direct Pathway Mapping" },
+    { id: 2, name: "Pathway Enrichment"}
   ];
   methods = {
     Metabolitics: 0,
@@ -80,6 +83,7 @@ export class ConcentrationTableComponent implements OnInit {
   ngOnInit() {
     let dateTime = new Date().toLocaleString();
     console.log(this.conTable);
+    this.unmappedMetabolites = this.conTable.filter((m) => {return m[4] == false;})
     this.form = this.createForm();
     this.analyzeName = new FormControl("My Analyze - " + dateTime, Validators.required);
     this.isPublic = new FormControl(true, Validators.required);
@@ -92,7 +96,13 @@ export class ConcentrationTableComponent implements OnInit {
         map(value => typeof value === 'string' ? value : (value.name + value.synonym)),
         map(name => name ? this._filter(name) : this.diseases.slice())
       );
+    this.updatePieChart();
   }
+
+  ngOnChanges(){
+    this.updatePieChart();
+  }
+
   fetchDiseases() {
     this.http.get(`${AppSettings.API_ENDPOINT}/diseases/all`, this.login.optionByAuthorization())
 
@@ -124,6 +134,25 @@ export class ConcentrationTableComponent implements OnInit {
   }
   remove(index) {
     this.conTable.splice(index, 1);
+    this.updatePieChart();
+  }
+
+  updatePieChart() {
+    var data = [{
+      values: [this.conTable.length - this.unmappedMetabolites.length, this.unmappedMetabolites.length],
+      labels: ['Mapped Metabolites', 'Unmapped Metabolites'],
+      type: 'pie'
+    }];
+  
+    var layout = {
+      height: 250,
+      margin: {
+        t: 10,
+        b: 10,
+      },
+    };
+  
+    Plotly.react('chart', data, layout);
   }
 
   createForm() {
@@ -136,7 +165,7 @@ export class ConcentrationTableComponent implements OnInit {
   onSubmit(value) {
     // this.conTable.push([value['name'], parseInt(value['value'])]);
     // this.form = this.createForm();
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
       if (recon.metabolites[value['name']]) {
         // tslint:disable-next-line:max-line-length
         this.conTable.push([value['name'], value['value'], recon.metabolites[value['name']].id, recon.metabolites[value['name']].name, true]);
@@ -170,6 +199,8 @@ export class ConcentrationTableComponent implements OnInit {
     //   }
 
     // });
+    this.unmappedMetabolites = this.conTable.filter((m) => {return m[4] == false;});
+    this.updatePieChart();
   }
 
   analyze() {
@@ -260,12 +291,11 @@ export class ConcentrationTableComponent implements OnInit {
   metabolitics(data) {
 
     if (this.login.isLoggedIn()) {
-
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/fva`,
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
-          this.notify.info('Analysis Start', 'Analysis in progress');
-          this.router.navigate(['/past-analysis', data['id']]);
+          this.router.navigate(['/past-analysis'])
         },
           error => {
             this.notify.error('Analysis Fail', error);
@@ -294,12 +324,11 @@ export class ConcentrationTableComponent implements OnInit {
   directPathwayMapping(data) {
 
     if (this.login.isLoggedIn()) {
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/direct-pathway-mapping`,
         data, this.login.optionByAuthorization())
         .subscribe((data: any) => {
-          this.notify.info('Analysis Start', 'Analysis in progress');
-          this.notify.success('Analysis Done', 'Analysis is successfully done');
-          this.router.navigate(['/past-analysis', data['id']]);
+          this.router.navigate(['/past-analysis'])
         },
           error => {
             this.notify.error('Analysis Fail', error);
@@ -330,17 +359,34 @@ export class ConcentrationTableComponent implements OnInit {
 
 
   metaboliteEnrichment(data) {
-    this.http.post(`http://127.0.0.1:5000/analysis/metabolite-enrichment`,
-      data, this.login.optionByAuthorization())
-      .subscribe((data: any) => {
-        // console.log(data);
-        this.notify.info('Analysis Start', 'Analysis in progress');
-        this.notify.success('Analysis Done', 'Analysis is successfully done');
-        this.router.navigate(['/past-analysis', data['id']]);
-      },
-        error => {
-          this.notify.error('Analysis Fail', error);
-        });
-    localStorage.setItem('search-results', JSON.stringify(data));
+    if (this.login.isLoggedIn()) {
+      this.notify.info('Analysis Start', 'Analysis in progress');
+      this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment`,
+        data, this.login.optionByAuthorization())
+        .subscribe((data: any) => {
+          this.router.navigate(['/past-analysis'])
+        },
+          error => {
+            this.notify.error('Analysis Fail', error);
+          });
+
+      localStorage.setItem('search-results', JSON.stringify(data));
+    } // if
+    else {
+      this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment/public`,
+        data, this.login.optionByAuthorization())
+        .subscribe((data: any) => {
+          this.notify.info('Analysis Start', 'Analysis in progress');
+          this.notify.success('Analysis Done', 'Analysis Results sent to your email');
+          this.router.navigate(['/search']);
+        },
+          error => {
+            this.notify.error('Analysis Fail', error);
+          });
+
+      localStorage.setItem('search-results', JSON.stringify(data));
+      // this.router.navigate(['/search']);
+
+    }// else
   }
 }

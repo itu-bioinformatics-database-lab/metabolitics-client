@@ -23,6 +23,7 @@ export const SubsystemAnalyzeRoutes: Routes = [
       { path: 'sample', component: SampleComponent },
       { path: 'excel-data', component: ExcelComponent },
       { path: '', redirectTo: 'measurement', pathMatch: 'full' }
-    ]
+    ],
+    canActivate: [AuthGuard]
   }
 ];

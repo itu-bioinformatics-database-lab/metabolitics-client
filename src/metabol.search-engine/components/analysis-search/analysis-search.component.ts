@@ -62,7 +62,7 @@ export class AnalysisSearchComponent implements OnInit {
 
   ngOnInit() {
 
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
       this.metabols = Object.keys(recon.metabolites).sort();
       this.pathways = Object.keys(recon.pathways).sort();
 

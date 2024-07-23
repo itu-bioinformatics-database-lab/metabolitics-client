@@ -26,7 +26,7 @@ export class PastAnalysisDetailComponent implements OnInit {
   idData;
   recDATA:JSON;
   selectedMethod;
-  selectedObj=30;
+  selectedObj=0;
   methods = {
     Metabolitics: '\d',
     DirectPathwayMapping: 'direct-pathway-mapping'
@@ -56,6 +56,10 @@ export class PastAnalysisDetailComponent implements OnInit {
     //     this.router.navigate(['/past-analysis']);
     //   }
     });
+    if (localStorage.getItem('selectedObj2')){
+      this.selectedObj = Number(localStorage.getItem('selectedObj2'));
+      localStorage.removeItem('selectedObj2');
+    }
   }
 
   getData() {
@@ -89,6 +93,9 @@ export class PastAnalysisDetailComponent implements OnInit {
          });
          this.data['results_pathway'][0] = eliminated;
          console.log(data);
+         if (this.selectedObj == 0){
+          this.selectedObj = this.data['analyses'][0]['id'];
+         }
       });
 
       // console.log(typeof JSON.parse(this.data));
@@ -136,6 +143,7 @@ export class PastAnalysisDetailComponent implements OnInit {
     // console.log("Worked");
     // console.log(this.selectedObj);
     localStorage.setItem('reload', 'True');
+    localStorage.setItem('selectedObj2', String(this.selectedObj));
     this.router.navigate(['/past-analysis', this.selectedObj]);
 
   }

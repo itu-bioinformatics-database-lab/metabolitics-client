@@ -24,7 +24,7 @@ export class PathwayVisualizationComponent implements OnChanges {
     private http: HttpClient) { }
 
   ngOnChanges() {
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
       let element = d3.select(this.elementRef.nativeElement).select('#map_container_3');
       this.escher.buildPathwayMap(this.name, recon, element, this.fluxes, (m) => {
         //if (this.fluxes) this.escher.setFluxData(m, this.fluxes);

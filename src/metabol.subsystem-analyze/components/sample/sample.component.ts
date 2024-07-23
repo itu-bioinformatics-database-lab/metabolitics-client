@@ -5,6 +5,7 @@ import {MetaboliteConcentration} from "../../models/metaboliteConcentration";
 import { Component, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import synonyms from '../../../assets/datasets/synonyms_latest.json';
+import { AppSettings } from '../../../app/';
 
 @Component({
   selector: 'app-sample',
@@ -14,6 +15,7 @@ import synonyms from '../../../assets/datasets/synonyms_latest.json';
 export class SampleComponent implements OnInit {
 
   conTable: Array<[string, number, string, string, boolean]> = [];
+  unmappedMetabolites: Array<[string, number, string, string, boolean]> = [];
   public synonymList: [] = synonyms;
   constructor(private http: HttpClient, private loader: AppDataLoader) { }
 
@@ -25,7 +27,7 @@ export class SampleComponent implements OnInit {
     this.http.get('assets/example-analyze-doc-files/example.json')
 
       .subscribe((data:any) => {
-        this.loader.get('recon2', (recon) => {
+        this.loader.get('Recon3D', (recon) => {
           // tslint:disable-next-line:forin
           for (let key in data) {
             let change = data[key];
@@ -45,6 +47,7 @@ export class SampleComponent implements OnInit {
             }
           }
         })
+        this.unmappedMetabolites = this.conTable.filter((m) => {return m[4] == false;})
       });
   }
   prioritizeMetabolites(metaboliteList) {

@@ -15,6 +15,8 @@ import { MatTabsModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
 
 import {MatListModule} from '@angular/material/list';
+import { MatProgressSpinnerModule } from '@angular/material'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
   PanelComponent,
@@ -27,6 +29,7 @@ import {
   DialogReactionResultsComponent,
   ResultTableComponent,
   SimilarDiseasesComponent,
+  DiseasePredictionComponent,
   AnalysisListComponent,
   SearchAnalysisResultComponent,
 
@@ -48,6 +51,7 @@ import { from } from 'rxjs';
     DialogReactionResultsComponent,
     ResultTableComponent,
     SimilarDiseasesComponent,
+    DiseasePredictionComponent,
     AnalysisListComponent,
     SearchAnalysisResultComponent,
   ],
@@ -69,6 +73,8 @@ import { from } from 'rxjs';
     PanelRoutesRouting,
     SubsystemAnalyzeModule,
     VisualizationModule,
+    MatProgressSpinnerModule,
+    BrowserAnimationsModule
   ],
   providers: [
     LoginService,

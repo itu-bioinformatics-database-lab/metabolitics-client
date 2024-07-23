@@ -18,7 +18,7 @@ export class SearchResultComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.loader.get('recon2', (recon) => {
+      this.loader.get('Recon3D', (recon) => {
         // this.filteredReactions = this.filter(recon.reactions, params['query']);
         // this.filteredMetabolites = this.filter(recon.metabolites, params['query']);
         // this.filteredPathways = this.filter(recon.pathways, params['query']);

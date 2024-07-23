@@ -1,6 +1,10 @@
-<div class="panel panel-default">
-  <table *ngIf="diseases" class="table table-hover">
+<div *ngIf="diseases.length !== 0" class="panel panel-default">
+  <table class="table table-hover">
     <thead>
+      <tr>
+        <th>Similarity-based Disease Prediction</th>
+        <th></th>
+      </tr>
       <tr>
 	<th>Disease</th>
 	<th>Similarity</th>
@@ -8,8 +12,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let p of diseases | pairs">
-	<td>{{ p[0] }}</td>
-	<td>{{ p[1] }}</td>
+	<td style="text-transform: capitalize;">{{ p[0] }}</td>
+	<td>{{ p[1].toPrecision(3) }}</td>
       </tr>
     </tbody>
   </table>

@@ -8268,7 +8268,7 @@ export class MetaboliteDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.loader.get("recon2", (recon) => {
+      this.loader.get("Recon3D", (recon) => {
         this.synonyms = [];
         this.metabolite = recon.metabolites[params['id']];
         // Since we have 4 different data-source in combined json file attached to RECON data, we will go through each.

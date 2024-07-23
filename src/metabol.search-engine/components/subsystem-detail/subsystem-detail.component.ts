@@ -30,7 +30,7 @@ export class SubsystemDetailComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.pathway = decodeURIComponent(params['id']);
       console.log(this.pathway);
-      this.loader.get('recon2', (recon) => {
+      this.loader.get('Recon3D', (recon) => {
         this.reactions = recon.pathways[this.pathway].map(x => recon.reactions[x]);
         // this.router.navigate(['/subsystem/detail/',this.pathway]);
         // this.router.navigateByUrl('/subsystem/detail/'+this.pathway)

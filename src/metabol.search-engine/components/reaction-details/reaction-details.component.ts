@@ -19,7 +19,7 @@ export class ReactionDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.loader.get("recon2", (recon) => {
+      this.loader.get("Recon3D", (recon) => {
         this.reaction = recon.reactions[params['id']];
         this.relatedMetabolites = _.keys(this.reaction.metabolites).map(x => recon.metabolites[x]);
       });

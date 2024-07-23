@@ -4,7 +4,7 @@
     <div class="navbar-header">
       <a class="navbar-brand" id="logo"  [routerLink]="['search']">
         <img src="assets/img/logo.png" alt=""/>
-        <span>Metabolitics - 0.1.0</span>
+        <span>MetaboliticsDB - 1.0</span>
       </a>
     </div>
     <div class="nav navbar-nav navbar-right">
@@ -20,8 +20,8 @@
 	Documentation
       </button>
       <mat-menu #browseMenu="matMenu">
-	<button mat-menu-item [routerLink]="['subsystem']">Browse Pathways</button>
-	<button mat-menu-item  [routerLink]="['past-analysis']">Browse Analysis</button>
+	<button mat-menu-item [routerLink]="['subsystem/detail/Alanine and aspartate metabolism']">Browse Pathways</button>
+	<button mat-menu-item  [routerLink]="['past-analysis']">Browse Metabolomics Analyses</button>
       </mat-menu>
       <button mat-button [matMenuTriggerFor]="browseMenu">
 	Browse
@@ -33,7 +33,7 @@
 	Login
       </button>
       <mat-menu #accountMenu="matMenu">
-	<button mat-menu-item [routerLink]="['panel']">Profile</button>
+	<button mat-menu-item [routerLink]="['panel']" *ngIf="!loginService.isDemoUser()">Profile</button>
 	<button mat-menu-item [routerLink]="['past-analysis']">Past Analysis</button>
 	<button mat-menu-item [routerLink]="['panel']" (click)="loginService.logout()">
 	  Logout

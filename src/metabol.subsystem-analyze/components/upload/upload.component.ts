@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppSettings } from '../../../app/';
 import synonyms from '../../../assets/datasets/synonyms_latest.json';
+import { NotificationsService } from 'angular2-notifications';
 
 
 @Component({
@@ -51,10 +52,15 @@ export class UploadComponent {
   private login: LoginService,
   private notify: SimpleNotificationsModule,
   private httpClient: HttpClient,
-  private loader: AppDataLoader
+  private loader: AppDataLoader,
+  private notify2: NotificationsService,
 ) { }
 
+  ngOnInit() {
+  }
+
   jsonChange($event) {
+    this.notify2.info('File Upload', 'File uploading');
     this.readJson($event.target);
   }
 
@@ -68,7 +74,7 @@ export class UploadComponent {
     // this.temp = JSON.parse(JSON.stringify(e.target.result));
     this.temp = JSON.parse(e.target.result);
     // console.log(this.temp);
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
       for (let t in this.temp) {
         if (recon.metabolites[t]) {
           this.conTable.push([t, this.temp[t], recon.metabolites[t].id, recon.metabolites[t].name, true]);
@@ -91,6 +97,7 @@ export class UploadComponent {
   }
 
   csvChange($event) {
+    this.notify2.info('File Upload', 'File uploading');
     this.readCsv($event.target);
   }
 
@@ -100,7 +107,7 @@ export class UploadComponent {
     myReader.readAsText(file);
     myReader.onload = (e: any) => {
       const lines = e.target.result.split("\n");
-      this.loader.get('recon2', (recon) => {
+      this.loader.get('Recon3D', (recon) => {
         for (let line of lines){
           const splitted = line.split(',');
           const originalName = splitted[0];
@@ -129,6 +136,7 @@ export class UploadComponent {
 
   ///////////////////////////////// Workbench
   readText(inputValue: any){
+    this.notify2.info('File Upload', 'File uploading');
 
     this.file3 = inputValue.target.files[0];
     let fileReader = new FileReader();
@@ -162,6 +170,7 @@ export class UploadComponent {
   //////////////////////////// excel
 
   incomingfile(event) {
+    this.notify2.info('File Upload', 'File uploading');
     this.file5 = event.target.files[0];
     this.onFileChange(this.file5);
   }

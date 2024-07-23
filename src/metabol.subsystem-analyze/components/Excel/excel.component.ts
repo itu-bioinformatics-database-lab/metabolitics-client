@@ -28,6 +28,8 @@ export interface Disease2 {
   synonym: string;
 }
 
+declare var Plotly: any;
+
 @Component({
   selector: 'app-manual',
   templateUrl: 'excel.component.html',
@@ -72,14 +74,17 @@ export class ExcelComponent implements OnInit {
   Disease: FormControl;
   selected = 'Combined.json';
 
+  unmappedMetabolites = [];
 
   comboboxMethods: Array<object> = [
     { id: 0, name: "Metabolitics" },
     { id: 1, name: "Direct Pathway Mapping" },
+    { id: 2, name: "Pathway Enrichment"}
   ];
   methods = {
     Metabolitics: 0,
     DirectPathwayMapping: 1,
+    MetaboliteEnrichment: 2
   };
 
 
@@ -103,7 +108,6 @@ export class ExcelComponent implements OnInit {
 
   ngOnInit(){
 
-
     this.form = this.createForm();
     this.analyzeName = new FormControl("My Analyze", Validators.required);
     this.isPublic = new FormControl(true, Validators.required);
@@ -126,11 +130,11 @@ export class ExcelComponent implements OnInit {
       this.labels.push(this.usersData2['analysis'][name]['Label']);
       // this.metaboliteValues.push(Object.entries(this.usersData2['analysis'][name]['Metabolites']));
     }
-    for(let key in this.usersData2['analysis'][this.cases[0]]["Metabolites"]) {
+    for(let key in this.usersData2['isMapped']) {
     this.metaboliteNames.push(key); 
   }
 
-    this.loader.get('recon2', (recon) => {
+    this.loader.get('Recon3D', (recon) => {
   for (var _i = 0; _i < this.metaboliteNames.length; _i++) {
     let temp_list = new Array();
     let temp_metabol_name;
@@ -152,10 +156,18 @@ export class ExcelComponent implements OnInit {
         temp_list.unshift("- (-)");
       }
     }
-    temp_list.unshift(temp_metabol_name);
+    if (temp_metabol_name in this.usersData2['metabol']) {
+      temp_list.unshift(this.usersData2['metabol'][temp_metabol_name]);
+    } else {
+      temp_list.unshift(temp_metabol_name);
+    }
+    if (temp_list.includes("- (-)")){
+      this.unmappedMetabolites.push(temp_list);
+    }
     this.usersData3.push(temp_list);
 
 }
+  this.updatePieChart();
   });
   
 
@@ -167,7 +179,28 @@ console.log(this.usersData3);
 
   localStorage.removeItem('metabolitics-data');
 
+  this.updatePieChart();
 
+
+  }
+
+  updatePieChart() {
+    var data = [{
+      values: [this.usersData3.length - this.unmappedMetabolites.length, this.unmappedMetabolites.length],
+      labels: ['Mapped Metabolites', 'Unmapped Metabolites'],
+      type: 'pie'
+    }];
+  
+    var layout = {
+      height: 250,
+      width: 450,
+      margin: {
+        t: 10,
+        b: 10
+      },
+    };
+  
+    Plotly.newPlot('chart', data, layout);
   }
 
     onSubmit() {
@@ -257,6 +290,9 @@ private _filter(name: string): Disease2[] {
     else if(selectedMethod === this.methods.DirectPathwayMapping) {
       this.directPathwayMapping(this.usersData2);
     }
+    else if (selectedMethod === this.methods.MetaboliteEnrichment) {
+      this.metaboliteEnrichment(this.usersData2);
+    }
 
   }
 
@@ -264,12 +300,11 @@ private _filter(name: string): Disease2[] {
   metabolitics(data) {
 
     if (this.login.isLoggedIn()){
-
+      this.notify.info('Analysis Start', 'Analysis in progress');
     this.http.post(`${AppSettings.API_ENDPOINT}/analysis/fva`,
       data, this.login.optionByAuthorization())
       .subscribe((data: any) => {
-        this.notify.info('Analysis Start', 'Analysis in progress');
-        this.router.navigate(['/past-analysis', data['id']]);
+        this.router.navigate(['/past-analysis'])
       },
         error => {
           this.notify.error('Analysis Fail', error);
@@ -295,12 +330,11 @@ private _filter(name: string): Disease2[] {
   directPathwayMapping(data) {
 
     if (this.login.isLoggedIn()){
+      this.notify.info('Analysis Start', 'Analysis in progress');
       this.http.post(`${AppSettings.API_ENDPOINT}/analysis/direct-pathway-mapping`,
          data, this.login.optionByAuthorization())
          .subscribe((data:any) => {
-           this.notify.info('Analysis Start', 'Analysis in progress');
-           this.notify.success('Analysis Done', 'Analysis is successfully done');
-           this.router.navigate(['/past-analysis', data['id']]);
+           this.router.navigate(['/past-analysis'])
          },
          error => {
          this.notify.error('Analysis Fail', error);
@@ -311,6 +345,40 @@ private _filter(name: string): Disease2[] {
     } // if
 else{
   this.http.post(`${AppSettings.API_ENDPOINT}/analysis/direct-pathway-mapping/public`,
+  data, this.login.optionByAuthorization())
+  .subscribe((data:any) => {
+    this.notify.info('Analysis Start', 'Analysis in progress');
+    this.notify.success('Analysis Done', 'Analysis Results sent to your email');
+    this.router.navigate(['/search']);
+  },
+  error => {
+  this.notify.error('Analysis Fail', error);
+});
+localStorage.setItem('search-results', JSON.stringify(data));
+
+
+}// else 
+
+  }
+
+  metaboliteEnrichment(data) {
+
+    if (this.login.isLoggedIn()){
+      this.notify.info('Analysis Start', 'Analysis in progress');
+      this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment`,
+         data, this.login.optionByAuthorization())
+         .subscribe((data:any) => {
+           this.router.navigate(['/past-analysis'])
+         },
+         error => {
+         this.notify.error('Analysis Fail', error);
+      });
+
+    localStorage.setItem('search-results', JSON.stringify(data));
+    
+    } // if
+else{
+  this.http.post(`${AppSettings.API_ENDPOINT}/analysis/pathway-enrichment/public`,
   data, this.login.optionByAuthorization())
   .subscribe((data:any) => {
     this.notify.info('Analysis Start', 'Analysis in progress');

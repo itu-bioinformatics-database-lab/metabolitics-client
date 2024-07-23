@@ -1,10 +1,11 @@
+<h4 *ngIf="title" style="text-align: center;">Pathway-Level {{title}}</h4>
 <ngx-datatable
    class="material"
    [rows]="tableData"
    [columnMode]="'flex'"
    [rowHeight]="'auto'"
    [columns]="columns"
-   [sorts]="[{prop: 'name'}]">
+   [sorts]="[{prop: 'name'}]" style="border-radius: 5px; padding: 5px; margin-bottom: 30px;">
   <ngx-datatable-column name="Name" [flexGrow]="3" >
     <ng-template let-value="value" ngx-datatable-cell-template>
       <a [routerLink]="['/', 'subsystem', 'detail', value]" target="_blank">
@@ -13,7 +14,7 @@
     </ng-template>
   </ngx-datatable-column>
   <ng-template ngFor let-n [ngForOf]="analysisNames" let-i="index">
-    <ngx-datatable-column name="{{n}}" [flexGrow]="3">
+    <ngx-datatable-column name="{{n | titlecase}}" [flexGrow]="3">
       <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
 	{{ row[n] }}
       </ng-template>

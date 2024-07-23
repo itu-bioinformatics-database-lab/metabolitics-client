@@ -14,13 +14,25 @@ import * as _ from 'lodash';
 export class ResultTableComponent implements OnInit, OnChanges {
 
   @Input() data;
+  @Input() method: String;
+  title;
   tableData;
 
   analysisNames: Array<string>;
   columns;
   constructor(private dialog: MatDialog) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    if (this.method == 'Metabolitics') {
+      this.title = 'Diff Score';
+    }
+    else if (this.method == 'Direct Pathway Mapping') {
+      this.title = 'Mapping Score';
+    }
+    else if (this.method == 'Pathway Enrichment') {
+      this.title = 'Enrichment P-Value';
+    }
+  }
 
   ngOnChanges() {
     //console.log(this.data[0].results_pathway[0]);
@@ -34,7 +46,10 @@ export class ResultTableComponent implements OnInit, OnChanges {
     this.analysisNames = [];
 
     for (let i = 0; i < this.data.length; i++) {
-      let analysisName = `${this.data[i].name}_${i}`;
+      let analysisName = `score ${i}`;
+      if (this.data.length == 1) {
+        analysisName = "score";
+      }
       this.columns.push({ prop: analysisName, comparator: this.scoreComparator.bind(this) });
       this.analysisNames.push(analysisName);
       for (let t of tableData)

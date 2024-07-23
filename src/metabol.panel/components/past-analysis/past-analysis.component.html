@@ -8,37 +8,41 @@
 		  Compare
 			</button>
         <form [formGroup]="form">
-
-		  <mat-tab-group>
+			<div *ngIf="!(data['list'].length != 0 || data['public'].length != 0) && loading">
+				<mat-spinner diameter="50" style="margin:0 auto 10px auto;"></mat-spinner>
+			</div>
+			<div *ngIf="!(data['list'].length != 0 || data['public'].length != 0) && !loading">
+				<p style="text-align: center;">No past analyses found.</p>
+			</div>
+		  <mat-tab-group *ngIf="data['list'].length != 0 || data['public'].length != 0">
 			<ng-template ngFor let-type [ngForOf]="data | keys">
-			  <mat-tab *ngIf="data[type].length != 0" [label]="(type == 'list' ? 'private' : type) | titlecase">
+			  <mat-tab *ngIf="type != 'disease' && type != 'results'" [label]="(type == 'list' ? 'private' : type) | titlecase">
 				<div class="panel panel-default">
-				  <mat-accordion>
-					  <mat-expansion-panel *ngFor="let i of data[type] | orderBy:'name'" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-						  <mat-expansion-panel-header>
-						  <mat-panel-title>
-								  <!-- <a [routerLink]="['/past-analysis', i.id]"> -->
-									  {{i.name}}<!--({{i.status ?  'done' : 'running' }})-->
-									  <!-- </a> -->
-						  </mat-panel-title>
-						  <mat-panel-description>
-								  {{i.method}}
-						  </mat-panel-description>
-						  </mat-expansion-panel-header>
-
-						  <li class="list-group-item" *ngFor="let j of i.analyses | orderBy:'name'">
-								  <div class="col-md-1 col-xs-1 col-lg-1"></div>
-								  <input type="checkbox" [formControlName]="j.id" />
-<!--                <input type="checkbox" [formControl]="j.id" />{{j.id}}-->
-
-
-								  <a [routerLink]="['/past-analysis', j.id]"> {{j.name}}
-								  </a>
-						  </li>
-
-
-            </mat-expansion-panel>
-				  </mat-accordion>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Method</th>
+									<th>Disease</th>
+									<th>Start</th>
+									<th>End</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let i of data[type] | orderBy:'name'">
+									<td><input type="checkbox" [formControlName]="i.avg_id" style="margin-right: 2px;" /><a [routerLink]="['/past-analysis', i.avg_id]">{{i.name}} ({{i.analyses.length}} samples)</a></td>
+									<td>{{i.method}}</td>
+									<td style="text-transform: capitalize;">{{i.disease}}</td>
+									<td *ngIf="i.start">{{i.start}}</td>
+									<td *ngIf="!i.start">Analysis in queue...</td>
+									<td *ngIf="i.end">{{i.end}}</td>
+									<td *ngIf="!i.end && i.start">{{i.progress}}% completed</td>
+									<td *ngIf="!i.end && !i.start">Analysis in queue...</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				 </div>
 			  </mat-tab>
 			</ng-template>
