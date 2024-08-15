@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { DialogPathwayVisualizationComponent } from '../dialog-pathway-visualization';
@@ -77,4 +78,36 @@ export class ResultTableComponent implements OnInit, OnChanges {
     return Math.abs(s1) > Math.abs(s2) ? 1 : -1;
   }
 
+  downloadCSV() {
+    const separator = ';';
+
+    const headers = ['Name'].concat(this.analysisNames);
+  
+    const headerRow = headers.join(separator);
+  
+    const dataRows = this.tableData.map(row => {
+      return headers.map(header => row[header] || row['name'] || '').join(separator);
+    });
+
+    const csvContent = headerRow + '\n' + dataRows.join('\n');
+     
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    if (this.method == 'Metabolitics') {
+      link.setAttribute('download', 'Metabolitics_Diff_Scores.csv');
+    }
+    else if (this.method == 'Direct Pathway Mapping') {
+      link.setAttribute('download', 'Direct_Pathway_Mapping_Scores.csv');;
+    }
+    else if (this.method == 'Pathway Enrichment') {
+      link.setAttribute('download', 'Pathway_Enrichment_P-Values.csv');;
+    }
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 }

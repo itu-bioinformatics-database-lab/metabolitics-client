@@ -1,4 +1,8 @@
-<h4 *ngIf="title" style="text-align: center;">Pathway-Level {{title}}</h4>
+<div class="table-container">
+  <h4 *ngIf="title" class="table-header">Pathway-Level {{title}}</h4>
+  <button class="csv-download-button"  (click)="downloadCSV()">Export Pathway Scores as CSV</button>
+</div>
+
 <ngx-datatable
    class="material"
    [rows]="tableData"
@@ -62,3 +66,4 @@
 <!--      </tr>-->
 <!--  </table>-->
 <!--</div>-->
+

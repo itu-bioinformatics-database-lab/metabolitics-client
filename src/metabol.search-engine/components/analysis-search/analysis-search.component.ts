@@ -33,7 +33,7 @@ export class AnalysisSearchComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
 
-
+ query:string;
 
   form: FormGroup;
   form2: FormGroup;
@@ -63,10 +63,8 @@ export class AnalysisSearchComponent implements OnInit {
   ngOnInit() {
 
     this.loader.get('Recon3D', (recon) => {
-      this.metabols = Object.keys(recon.metabolites).sort();
+      //this.metabols = Object.values(recon.metabolites);
       this.pathways = Object.keys(recon.pathways).sort();
-
-
     });
 
     this.form2 = this.fb.group({
@@ -88,7 +86,6 @@ export class AnalysisSearchComponent implements OnInit {
 
     this.filteredPathways = this.form.controls.pathway.valueChanges
       .pipe(map(val => val ? this.filter(val).sort() : this.pathways.slice()));
-
 
   }
 
@@ -153,4 +150,45 @@ export class AnalysisSearchComponent implements OnInit {
         this.router.navigate(['search-analysis-result']);
       });
   }
-}
+
+  getSearch(query: string) {
+    if (query) {
+      const queryLower = query.toLowerCase();
+  
+      this.httpClient.get<any>('assets/datasets/synonyms_latestt.json').subscribe((synonym: Record<string, string[]>) => {
+        const matchedEntries = Object.entries(synonym)
+          .filter(([name, ids]: [string, string[]]) => 
+            name.toLowerCase().startsWith(queryLower) || 
+            ids.some(id => id.toLowerCase().startsWith(queryLower))
+          );
+  
+        if (matchedEntries.length > 0) {
+          const matchedNames = matchedEntries.map(([name, _]) => name);
+  
+          const idSet = new Set<string>();
+          matchedEntries.forEach(([_, ids]) => {
+            ids.forEach(id => idSet.add(id));
+          });
+  
+          const matchedIds = Array.from(idSet);
+  
+          console.log('Matched Names:', matchedNames);
+          console.log('Matched IDs:', matchedIds);
+  
+          this.loader.get('Recon3D', (recon) => {
+            this.filteredMetabols = matchedIds
+              .map(id => recon.metabolites[id])
+              .filter(metabolite => metabolite)
+              .map(metabolite => ({ name: metabolite.name, id: metabolite.id }));
+  
+            console.log('Filtered Metabolites:', this.filteredMetabols);
+          });
+        } else {
+          this.filteredMetabols = [];
+          console.log('No matches found');
+        }
+      });
+    }
+  }
+}  
+

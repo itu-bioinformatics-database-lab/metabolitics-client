@@ -4,6 +4,7 @@ import { AppDataLoader } from '../../../metabol.common/services';
 import * as _ from 'lodash';
 import synonyms from '../../../assets/datasets/synonyms_latest.json';
 import { filter } from 'lodash';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'search-bar',
@@ -24,7 +25,7 @@ export class SearchBarComponent {
   public synonymList: [] = synonyms;
   filteredSynonyms = [];
 
-  constructor(private router: Router, private elementRef: ElementRef, private loader: AppDataLoader) { }
+  constructor(private router: Router, private elementRef: ElementRef, private loader: AppDataLoader, private http: HttpClient) { }
 
   search(query: string) {
     if (query)
@@ -39,10 +40,9 @@ export class SearchBarComponent {
       this.loader.get('Recon3D', (recon) => {
         this.filteredReactions = _.values<any>(recon.reactions)
           .filter(x => x.id.startsWith(query) || x.name.startsWith(query));
-        this.filteredMetabolites = _.values<any>(recon.metabolites)
-          .filter(x => x.id.startsWith(query) || x.name.startsWith(query));
         this.filteredPathways = _.keys(recon.pathways)
           .filter(x => x.toLowerCase().startsWith(query.toLowerCase()));
+      
         // let synonyms = [];
         // ['kegg', 'hmdb', 'pubChem', 'cheBI'].forEach(name => {
         //   let values = _.keys(this.mytest[name])
@@ -86,6 +86,43 @@ export class SearchBarComponent {
         //   this.filteredMetabolites.push(data);
         // });
       });
+      const queryLower = query.toLowerCase();
+
+      this.http.get<any>('assets/datasets/synonyms_latest.json').subscribe((synonym: Record<string, string[]>) => {
+        const matchedEntries = Object.entries(synonym)
+          .filter(([name, ids]: [string, string[]]) => 
+            name.toLowerCase().startsWith(queryLower) || 
+            ids.some(id => id.toLowerCase().startsWith(queryLower))
+          );
+
+        if (matchedEntries.length > 0) {
+          const matchedNames = matchedEntries.map(([name, _]) => name);
+
+          // Collect IDs while ensuring uniqueness
+          const idSet = new Set<string>();
+          matchedEntries.forEach(([_, ids]) => {
+            (ids as string[]).forEach(id => idSet.add(id));
+          });
+
+          const matchedIds = Array.from(idSet);
+
+          console.log('Matched Names:', matchedNames);
+          console.log('Matched IDs:', matchedIds);
+
+          this.loader.get('Recon3D', (recon) => {
+            this.filteredMetabolites = matchedIds
+              .map(id => recon.metabolites[id]) 
+              .filter(metabolite => metabolite) 
+              .map(metabolite => ({ name: metabolite.name, id: metabolite.id })); 
+
+            console.log('Filtered Metabolites:', this.filteredMetabolites);
+          });
+        } else {
+          this.filteredMetabolites = [];
+          console.log('No matches found');
+        }
+      });
+
     }
   }
 

@@ -16,12 +16,13 @@
     <mat-card-content>
       <form [formGroup]="form2" (ngSubmit)="add2(form2.value)">
         <mat-form-field>
-          <input matInput placeholder="Choose Metabolite" [matAutocomplete]="auto2" formControlName="metabol">
+          <input [(ngModel)]="query" type="text" matInput placeholder="Choose Metabolite" [matAutocomplete]="auto2" formControlName="metabol" (keyup)=getSearch(query)>
         </mat-form-field>
         <mat-autocomplete #auto2="matAutocomplete">
-          <mat-option *ngFor="let m of filteredMetabols | async" [value]="m">
-            {{ m }}
+          <mat-option *ngFor="let m of filteredMetabols" [value]="m.id">
+            <b>{{ m.id }}</b> - {{ m.name }}
           </mat-option>
+          
         </mat-autocomplete>
 
 
