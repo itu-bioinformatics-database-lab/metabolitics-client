@@ -155,7 +155,7 @@ export class AnalysisSearchComponent implements OnInit {
     if (query) {
       const queryLower = query.toLowerCase();
   
-      this.httpClient.get<any>('assets/datasets/synonyms_latestt.json').subscribe((synonym: Record<string, string[]>) => {
+      this.httpClient.get<any>('assets/datasets/synonyms_latest.json').subscribe((synonym: Record<string, string[]>) => {
         const matchedEntries = Object.entries(synonym)
           .filter(([name, ids]: [string, string[]]) => 
             name.toLowerCase().startsWith(queryLower) || 
