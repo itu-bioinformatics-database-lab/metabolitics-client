@@ -79,32 +79,38 @@ export class ResultTableComponent implements OnInit, OnChanges {
   }
 
   downloadCSV() {
-    const separator = ';';
+    const separator = ',';  
 
-    const headers = ['Name'].concat(this.analysisNames);
-  
+    const headers = ['"Name"'].concat(this.analysisNames.map(name => `"${name}"`));
+
     const headerRow = headers.join(separator);
-  
+
     const dataRows = this.tableData.map(row => {
-      return headers.map(header => row[header] || row['name'] || '').join(separator);
+      return headers.map(header => {
+        const key = header.replace(/"/g, '');  
+        const value = row[key] || row['name'] || '';
+        return `"${value}"`; 
+      }).join(separator);
     });
 
     const csvContent = headerRow + '\n' + dataRows.join('\n');
-     
+
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  
+
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
-    if (this.method == 'Metabolitics') {
+
+    if (this.method === 'Metabolitics') {
       link.setAttribute('download', 'Metabolitics_Diff_Scores.csv');
     }
-    else if (this.method == 'Direct Pathway Mapping') {
-      link.setAttribute('download', 'Direct_Pathway_Mapping_Scores.csv');;
+    else if (this.method === 'Direct Pathway Mapping') {
+      link.setAttribute('download', 'Direct_Pathway_Mapping_Scores.csv');
     }
-    else if (this.method == 'Pathway Enrichment') {
-      link.setAttribute('download', 'Pathway_Enrichment_P-Values.csv');;
+    else if (this.method === 'Pathway Enrichment') {
+      link.setAttribute('download', 'Pathway_Enrichment_P-Values.csv');
     }
+
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
