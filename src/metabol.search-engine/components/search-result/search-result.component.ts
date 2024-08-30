@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { AppDataLoader } from '../../../metabol.common/services';
 import * as _ from 'lodash';
@@ -24,14 +24,18 @@ export class SearchResultComponent implements OnInit {
         // this.filteredMetabolites = this.filter(recon.metabolites, params['query']);
         // this.filteredPathways = this.filter(recon.pathways, params['query']);
         const query = params['query'];
+        this.query = params['query'];
+        const querylower = query.toLowerCase();
         this.filteredReactions = _.values<any>(recon.reactions)
-          .filter(x => x.id.startsWith(query) || x.name.startsWith(query));
+          .filter(x => x.id.startsWith(query) || x.name.startsWith(query) || x.name.toLowerCase().startsWith(querylower) || x.id.toLowerCase().startsWith(querylower) );
         this.filteredPathways = _.keys(recon.pathways)
-          .filter(x => x.startsWith(query));
+          .filter(x => x.startsWith(query) || x.toLowerCase().startsWith(querylower));
         /*this.filteredMetabolites = _.values<any>(recon.metabolites)
           .filter(x => x.id.startsWith(query) || x.name.startsWith(query));*/
         
       });
+
+      console.log("query:" , this.query);
 
       const queryLower = params['query'].toLowerCase();
 
