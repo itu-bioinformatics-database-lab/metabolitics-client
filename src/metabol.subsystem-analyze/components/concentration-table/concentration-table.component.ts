@@ -205,8 +205,7 @@ export class ConcentrationTableComponent implements OnInit {
 
   analyze() {
     const selectedMethod = this.selectedMethod;
-
-    if(!this.Disease.value){
+    if(!this.myControl.value){
       alert("Please choose a disease on the top of the page to start analysis.");
       return;
     }
