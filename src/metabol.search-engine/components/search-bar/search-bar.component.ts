@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import { AppDataLoader } from '../../../metabol.common/services';
 import * as _ from 'lodash';
@@ -17,7 +17,7 @@ import { HttpClient } from '@angular/common/http';
 
 export class SearchBarComponent {
 
-  query: string;
+  @Input() query: string;
   recon: any;
   filteredMetabolites = [];
   filteredReactions = [];
@@ -37,9 +37,10 @@ export class SearchBarComponent {
   getSearch(query: string) {
     if (query)
     {
+      const querylower = query.toLowerCase();
       this.loader.get('Recon3D', (recon) => {
         this.filteredReactions = _.values<any>(recon.reactions)
-          .filter(x => x.id.startsWith(query) || x.name.startsWith(query));
+          .filter(x => x.id.startsWith(query) || x.name.startsWith(query) || x.name.toLowerCase().startsWith(querylower) || x.id.toLowerCase().startsWith(querylower));
         this.filteredPathways = _.keys(recon.pathways)
           .filter(x => x.toLowerCase().startsWith(query.toLowerCase()));
       
