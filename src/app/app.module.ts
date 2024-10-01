@@ -12,14 +12,14 @@ import {MatListModule} from '@angular/material/list';
 import { routing, appRoutingProviders } from './app.routes';
 import { AppComponent } from './app.component';
 
-import { DocumentationModule } from '../documentation';
+//import { DocumentationModule } from '../documentation';  --Lazy Loaded
 import { MetabolCommonModule } from '../metabol.common';
 import { SearchEngineModule } from "../metabol.search-engine";
 import { VisualizationModule } from "../metabol.visualization";
-import { MetabolAuthModule } from "../metabol.auth";
+import { MetabolAuthModule } from "../metabol.auth";  
 import { SubsystemAnalyzeModule } from "../metabol.subsystem-analyze";
 import { MetabolPanelModule } from '../metabol.panel';
-import {DemoModule} from "../demo";
+// import {DemoModule} from "../demo";
 // import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { MatButtonModule} from '@angular/material';
@@ -74,8 +74,8 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
     ReactiveFormsModule,
 
     MetabolCommonModule,
-    DocumentationModule,
-    DemoModule,
+    //DocumentationModule,  --Lazy loaded.
+    //DemoModule,   --Lazy loaded.
     MetabolAuthModule,
     SearchEngineModule,
     SubsystemAnalyzeModule,

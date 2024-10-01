@@ -1,12 +1,20 @@
+import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import {DemoComponent} from './demo.component';
 
 const demoRoutes: Routes = [
-    { path: 'demo', component: DemoComponent },
+    { path: '', component: DemoComponent },
 ];
 
-export const demoRoutingProviders: any[] = [];
+@NgModule({
+    imports: [RouterModule.forChild(demoRoutes)],
+    exports: [RouterModule]
+})
+export class DemoRoutingModule { }
 
-export const demoRouting: ModuleWithProviders = RouterModule.forRoot(demoRoutes);
+
+//export const demoRoutingProviders: any[] = [];
+
+//export const demoRouting: ModuleWithProviders = RouterModule.forRoot(demoRoutes);

@@ -1,12 +1,13 @@
-import { ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import {DocumentationComponent} from './documentation.component';
+import { DocumentationComponent } from './documentation.component';
 
 const documentationRoutes: Routes = [
-    { path: 'documentation', component: DocumentationComponent },
+    { path: '', component: DocumentationComponent }
 ];
 
-export const documentationRoutingProviders: any[] = [];
-
-export const documentationRouting: ModuleWithProviders = RouterModule.forRoot(documentationRoutes);
+@NgModule({
+    imports: [RouterModule.forChild(documentationRoutes)],
+    exports: [RouterModule]
+})
+export class DocumentationRoutingModule { }
